@@ -21,111 +21,165 @@
             }
         }
     </script>
+
 </head>
 
-<body>
-    <nav class="navbar navbar-light bg-white navbar-expand-md">
-        <div class="container col-12">
-            <a href="#" class="navbar-brand" href="/">
-                <b style="color:#314E55;">Framework Ninja</b>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
-                aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation"
-                onclick="displayMenu(event)">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbar-list">
-                <ul class="nav navbar-nav ml-auto ">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" href="/#endpoints">APIs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" href="/#endpoints">CSS Frameworks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" href="/#endpoints">Icon Packs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" href="/#endpoints">Search</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" href="/blog">Blog</a>
-                    </li>
-
-                </ul>
+<body style="background-color: #DAE0E6;">
+    <div class="shadow text-center container" style="max-width: 2500px;padding: 0px;">
+        <nav class="navbar navbar-light bg-white navbar-expand-md">
+            <div class="container col-12">
+                <a href="#" class="navbar-brand" href="/">
+                    <b style="color:#314E55;">Framework Ninja</b>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
+                    aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation"
+                    onclick="displayMenu(event)">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-list">
+                    <ul class="nav navbar-nav ml-auto ">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">APIs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">CSS Frameworks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">Icon Packs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/blog">Blog</a>
+                        </li>
+    
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    <section class="container-flex" style="padding: 10%; color:#314E55;" id="hero">
-        <div class="container col-10 text-center">
-            <h1 style="font-weight: bold;">
-                Discover. Compare. Love.
-            </h1>
+        </nav>
+    
+        <section class="container-flex" style="padding: 15% 0%; color: #213438;background-image: linear-gradient(rgb(168, 204, 235), #314E55);" id="hero">
+            <div class="container col-12 col-md-10 text-center">
+                <h1>
+                    <b>
+                        Discover. Compare. Love.
+                    </b>
+                </h1>
+                <br>
+                <h5>
+                    Find & compare tools, frameworks and APIs to inspire your projects.
+                </h5>
+            </div>
             <br>
-            <h5>
-                Find & compare tools, frameworks and APIs to inspire your projects.
-            </h5>
-        </div>
-    </section>
-    <section class="container-flex text-center" style="padding: 5% 0% 5%; background-color:#314E55; color: white;" id="hero">
-        <h2>
-            Get Started
-        </h2>
-        <hr style="width: 100px;border-width: 3px;">
-        Pick an topic to explore all that Framework Ninja has to offer
-    </section>
-    <section class="container-flex" style=" padding:10% 3%; min-height: 15%; " id="endpoints">
-        <div class="row">
-            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
-                <span class="fa-stack fa-4x btn">
-                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
-                    <i class="fas fa-icons fa-stack-1x"></i>
-                </span>
-                <p style="line-height: 2.5;">
-                    Icon Packs
-                </p>
-            </a>
-            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
-                <span class="fa-stack fa-4x btn">
-                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
-                    <i class="fab fa-css3-alt fa-stack-1x"></i>
-                </span>
-                <p style="line-height: 2.5;">
-                    CSS Frameworks
-                </p>
-            </a>
-            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
-                <span class="fa-stack fa-4x btn">
-                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
-                    <i class="fas fa-users fa-stack-1x"></i>
-                </span>
-                <p style="line-height: 2.5;">
-                    Fake User Data APIs
-                </p>
-            </a>
-            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
-                <span class="fa-stack fa-4x btn">
-                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
-                    <i class="fas fa-paw fa-stack-1x"></i>
-                </span>
-                <p style="line-height: 2.5;">
-                    Animal APIs
-                </p>
-            </a>
-            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
-                <span class="fa-stack fa-4x btn">
-                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
-                    <i class="fas fa-virus fa-stack-1x"></i>
-                </span>
-                <p style="line-height: 2.5;">
-                    Coronavirus APIs
-                </p>
-            </a>
-        </div>
-    </section>
-    <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
-        Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a> 
-    </footer>
+            <br>
+    
+            <div class="container col-12 col-md-7 text-center" style="max-width: 800px;">
+                <input style="height: 3em;border-width: 2px;" class="form-control" placeholder="Type keywords and press enter">
+            </div>
+        </section>
+        <section class="container-flex" style=" padding:6% 3%; min-height: 15%; " id="endpoints">
+            <h2>
+                Explore by Topic
+            </h2>
+            <hr style="width: 100px;border-width: 3px;">
+            <div class="row d-flex justify-content-center">
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-icons fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Icon Packs
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fab fa-css3-alt fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        CSS Frameworks
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-users fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Users
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-paw fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Animals
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-virus fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Coronavirus
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-icons fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Icon Packs
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fab fa-css3-alt fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        CSS Frameworks
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-users fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Users
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-paw fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Animals
+                    </p>
+                </a>
+                <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 2%;">
+                    <span class="fa-stack fa-4x btn">
+                        <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                        <i class="fas fa-virus fa-stack-1x"></i>
+                    </span>
+                    <p style="line-height: 2.5;">
+                        Coronavirus
+                    </p>
+                </a>
+            </div>
+        </section>
+        <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
+            Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a> 
+        </footer>
+    </div>
 
 </body>
 

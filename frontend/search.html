@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Framework Ninja
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script>
+        function displayMenu(event) {
+            if (document.getElementById("navbar-list").classList.contains("show")) {
+                document.getElementById("navbar-list").classList.remove("show")
+            }
+            else {
+                document.getElementById("navbar-list").classList.add("show")
+            }
+        }
+    </script>
+</head>
+
+<body style="background-color: #DAE0E6;">
+    <div class="shadow text-center container" style="max-width: 2500px;padding: 0px; background-color: white;">
+        <nav class="navbar navbar-light bg-white navbar-expand-md">
+            <div class="container col-12">
+                <a href="#" class="navbar-brand" href="/">
+                    <b style="color:#314E55;">Framework Ninja</b>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
+                    aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation"
+                    onclick="displayMenu(event)">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar-list">
+                    <ul class="nav navbar-nav ml-auto ">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">APIs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">CSS Frameworks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">Icon Packs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/#endpoints">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" href="/blog">Blog</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="container-flex  text-left" style=" color:#314E55; padding: 3%">
+            <div class="row">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <br>
+                    <h5 class="card-title text-center">
+                        Search Options
+                    </h5>
+                    <form class="row">
+                        <div class="col-6 col-md-12 form-group">
+                            <label>
+                                Keywords
+                            </label>
+                            <input class="form-control">
+                        </div>
+                        <div class="col-6 col-md-12 form-group">
+                            <label>
+                                Type
+                            </label>
+                            <select class="form-control">
+                                <option>
+                                    hh
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-12 form-group">
+                            <label>
+                                Framework
+                            </label>
+                            <select class="form-control">
+                                <option>
+                                    hh
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-12 form-group">
+                            <button class="btn btn-success form-control" style="margin-top: 2em;">Search</button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-12 col-md-8 col-lg-9">
+                    <br>
+                    <h3>
+                        Search Results
+                    </h3>
+                    <hr>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-8">
+                                <h4>
+                                    <i class="fas fa-icons" style="color: black; font-size: 0.8em;"></i>&nbsp;
+                                    <a href="#">
+                                        Font Awesome
+                                    </a>
+                                </h4>
+                                <p style="color:black;padding-left: 2.5em;">
+
+                                    jjjjj
+                                </p>
+                                <p style="color:black;padding-left: 2.5em;font-size: 0.8em;">
+                                    <i class="fas fa-icons"></i>&nbsp; hhhh <i class="fas fa-icons"></i>&nbsp; hhhh
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-8">
+                                <h4>
+                                    <i class="fas fa-icons" style="color: black; font-size: 0.8em;"></i>&nbsp;
+                                    <a href="#">
+                                        Font Awesome
+                                    </a>
+                                </h4>
+                                <p style="color:black;padding-left: 2.5em;">
+
+                                    jjjjj
+                                </p>
+                                <p style="color:black;padding-left: 2.5em;font-size: 0.8em;">
+                                    <i class="fas fa-icons"></i>&nbsp; hhhh <i class="fas fa-icons"></i>&nbsp; hhhh
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-8">
+                                <h4>
+                                    <i class="fas fa-icons" style="color: black; font-size: 0.8em;"></i>&nbsp;
+                                    <a href="#">
+                                        Font Awesome
+                                    </a>
+                                </h4>
+                                <p style="color:black;padding-left: 2.5em;">
+
+                                    jjjjj
+                                </p>
+                                <p style="color:black;padding-left: 2.5em;font-size: 0.8em;">
+                                    <i class="fas fa-icons"></i>&nbsp; hhhh <i class="fas fa-icons"></i>&nbsp; hhhh
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-8">
+                                <h4>
+                                    <i class="fas fa-icons" style="color: black; font-size: 0.8em;"></i>&nbsp;
+                                    <a href="#">
+                                        Font Awesome
+                                    </a>
+                                </h4>
+                                <p style="color:black;padding-left: 2.5em;">
+
+                                    jjjjj
+                                </p>
+                                <p style="color:black;padding-left: 2.5em;font-size: 0.8em;">
+                                    <i class="fas fa-icons"></i>&nbsp; hhhh <i class="fas fa-icons"></i>&nbsp; hhhh
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-8">
+                                <h4>
+                                    <i class="fas fa-icons" style="color: black; font-size: 0.8em;"></i>&nbsp;
+                                    <a href="#">
+                                        Font Awesome
+                                    </a>
+                                </h4>
+                                <p style="color:black;padding-left: 2.5em;">
+
+                                    jjjjj
+                                </p>
+                                <p style="color:black;padding-left: 2.5em;font-size: 0.8em;">
+                                    <i class="fas fa-icons"></i>&nbsp; hhhh <i class="fas fa-icons"></i>&nbsp; hhhh
+
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <br>
+                <br>
+        </section>
+
+        <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
+            Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a>
+        </footer>
+    </div>
+</body>
+
+</html>
