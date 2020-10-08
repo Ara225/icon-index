@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Framework Ninja
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script>
+        function displayMenu(event) {
+            if (document.getElementById("navbar-list").classList.contains("show")) {
+                document.getElementById("navbar-list").classList.remove("show")
+            }
+            else {
+                document.getElementById("navbar-list").classList.add("show")
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-white navbar-expand-md">
+        <div class="container col-12">
+            <a href="#" class="navbar-brand" href="/">
+                <b style="color:#314E55;">Framework Ninja</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
+                aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation"
+                onclick="displayMenu(event)">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-list">
+                <ul class="nav navbar-nav ml-auto ">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">APIs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">CSS Frameworks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">Icon Packs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/blog">Blog</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <section class="container" style=" color:#314E55" id="hero">
+        <div class="col-12" style="font-weight: bold;padding: 3%;background-color:#DAE0E6;">
+            <h1>
+                Font Awesome
+            </h1>
+        </div>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="card" style="height: 100%;">
+                    <div class="card-body">
+                        <h3 class="card-title">About</h3>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porttitor quam vitae velit porta
+                        porta. Cras a mattis orci, rutrum porta ligula. Praesent pretium varius velit, non aliquet
+                        lectus hendrerit vel. Sed imperdiet magna ac felis auctor, in consectetur eros eleifend. Duis at
+                        nulla tellus. Nunc vulputate interdum ornare. Phasellus dictum, sapien a dapibus tincidunt, diam
+                        odio tempor sem, id luctus enim purus quis velit. Sed sagittis, turpis eget mollis dapibus,
+                        massa massa dapibus ligula, et consequat mauris mi quis risus.
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quick Stats</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Search Icons</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </section>
+
+    <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
+        Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a>
+    </footer>
+
+</body>
+
+</html>

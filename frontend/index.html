@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Framework Ninja
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script>
+        function displayMenu(event) {
+            if (document.getElementById("navbar-list").classList.contains("show")) {
+                document.getElementById("navbar-list").classList.remove("show")
+            }
+            else {
+                document.getElementById("navbar-list").classList.add("show")
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-white navbar-expand-md">
+        <div class="container col-12">
+            <a href="#" class="navbar-brand" href="/">
+                <b style="color:#314E55;">Framework Ninja</b>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
+                aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation"
+                onclick="displayMenu(event)">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-list">
+                <ul class="nav navbar-nav ml-auto ">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">APIs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">CSS Frameworks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">Icon Packs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/#endpoints">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" href="/blog">Blog</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container-flex" style="padding: 10%; color:#314E55;" id="hero">
+        <div class="container col-10 text-center">
+            <h1 style="font-weight: bold;">
+                Discover. Compare. Love.
+            </h1>
+            <br>
+            <h5>
+                Find & compare tools, frameworks and APIs to inspire your projects.
+            </h5>
+        </div>
+    </section>
+    <section class="container-flex text-center" style="padding: 5% 0% 5%; background-color:#314E55; color: white;" id="hero">
+        <h2>
+            Get Started
+        </h2>
+        <hr style="width: 100px;border-width: 3px;">
+        Pick an topic to explore all that Framework Ninja has to offer
+    </section>
+    <section class="container-flex" style=" padding:10% 3%; min-height: 15%; " id="endpoints">
+        <div class="row">
+            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
+                <span class="fa-stack fa-4x btn">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
+                    <i class="fas fa-icons fa-stack-1x"></i>
+                </span>
+                <p style="line-height: 2.5;">
+                    Icon Packs
+                </p>
+            </a>
+            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
+                <span class="fa-stack fa-4x btn">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
+                    <i class="fab fa-css3-alt fa-stack-1x"></i>
+                </span>
+                <p style="line-height: 2.5;">
+                    CSS Frameworks
+                </p>
+            </a>
+            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
+                <span class="fa-stack fa-4x btn">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
+                    <i class="fas fa-users fa-stack-1x"></i>
+                </span>
+                <p style="line-height: 2.5;">
+                    Fake User Data APIs
+                </p>
+            </a>
+            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
+                <span class="fa-stack fa-4x btn">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
+                    <i class="fas fa-paw fa-stack-1x"></i>
+                </span>
+                <p style="line-height: 2.5;">
+                    Animal APIs
+                </p>
+            </a>
+            <a title="Click to try out this endpoint" href="#" class="col-4 col-lg-2 text-center" style="margin: 1% 0%;">
+                <span class="fa-stack fa-4x btn">
+                    <i class="fa fa-circle fa-stack-2x" style="color:#DAE0E6;"></i>
+                    <i class="fas fa-virus fa-stack-1x"></i>
+                </span>
+                <p style="line-height: 2.5;">
+                    Coronavirus APIs
+                </p>
+            </a>
+        </div>
+    </section>
+    <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
+        Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a> 
+    </footer>
+
+</body>
+
+</html>
