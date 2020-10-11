@@ -17,3 +17,15 @@ function hide(event) {
     }
     document.getElementById("overlay").classList.add("d-none");
 }
+function copyToClipboard(event) {
+    /* Get the text field */
+    var copyText = event.target.parentElement.children[2];
+    
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+  
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+    event.target.innerText = "Copied!";
+} 

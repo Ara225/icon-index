@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<html lang="en">
+
+<head>
+    <title>Leigh Rescue Centre | About</title>
+    <meta name="Description" CONTENT="About Leigh Rescue Centre: what we do, how we do it and why we do it">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script>
+        function copyToClipboard(event) {
+            /* Get the text field */
+            var copyText = event.target.parentElement.children[2];
+            
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+          
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+
+            event.target.innerText = "Copied!";
+        } 
+    </script>
+</head>
+<!-- text-white bg-dark mb-3 - card dark mode-->
+
+<body>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-body container-flex">
+                    <i class="fab fa-accusoft" style="font-size: 200px"></i>
+                    <h4>
+                        fa-accusoft from Font Awesome
+                    </h4>
+                    <div class="row">
+                        <p class="text-left col-12 col-md-6">
+                            Load Icon Pack <button  onclick="copyToClipboard(event)"
+                                style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
+                                class="btn btn-info">Copy</button>
+                            <br>
+                            <input value="xxxx" style="box-shadow: none;" class="form-control">
+                        </p>
+                        <p class="text-left col-12 col-md-6">
+                            Insert <button  onclick="copyToClipboard(event)"
+                                style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
+                                class="btn btn-info">Copy</button>
+                            <br>
+                            <input value="xxxx" style="box-shadow: none;" class="form-control">
+                        </p>
+                    </div>
+                    <h5>Styles</h5>
+                    <div class="row">
+                        <p class="text-left col-12 col-md-6">
+                            <label>
+                                Looks
+                            </label>
+                            <input class="form-control" type="color">
+                        </p>
+                        <p class="text-left col-12 col-md-6">
+                            <label>
+                                Behaviour
+                            </label>
+                            <button class="btn btn-outline-info d-block w-100">
+                                Spin
+                            </button>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <a role="button" href="#">
+                            <span class="fa-stack fa-1x">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a role="button" href="#" style="position: absolute; left: -8px; bottom:0px">
+                            <span class="fa-stack fa-2x">
+                                <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
+                                <i class="fas fa-angle-left fa-stack-1x" style="color:black"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        <a role="button" href="#" style="position: absolute; right: -8px; bottom:0px">
+                            <span class="fa-stack fa-2x">
+                                <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
+                                <i class="fas fa-angle-right fa-stack-1x" style="color:black"></i>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
