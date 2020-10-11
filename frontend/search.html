@@ -21,11 +21,57 @@
             }
         }
     </script>
-    <style>
-        .card-columns {
-            column-count: 4;
-        }
-    </style>
+<style>
+    #search-bar {
+        height: 46px;
+        border-radius: 48px;
+        border: 0.5px solid lightgrey;
+        width: 100%;
+        padding-right: 40px;
+        padding-left: 10px;
+    }
+
+    #search-btn {
+        height: 46px;
+        border-top-right-radius: 48px;
+        border-bottom-right-radius: 48px;
+        padding: 15px;
+        font-size: 1.1em;
+        position: absolute;
+        right: 15px;
+        border-left: 0.5px solid lightgrey;
+        background-color: rgb(66, 133, 102);
+    }
+
+    .menu-btn {
+        border-radius: 48px;
+        border: 0.5px solid lightgrey;
+        font-size: 0.9em;
+        padding: 2px 10px;
+        background-color: white;
+    }
+
+    .menu {
+        padding-top: 10px;
+        z-index: 200;
+        margin-top: 4px;
+        background-color: white;
+        position: absolute;
+    }
+
+    .menu-option {
+        padding: 6px 20px 6px;
+    }
+    
+    #overlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+    }
+</style>
 </head>
 
 <body style="background-color: #DAE0E6;">
@@ -63,159 +109,154 @@
             </div>
         </nav>
         <section class="container-flex  text-left" style=" color:#314E55; padding: 3%">
-            <div class="col-8 container">
-                <input
-                    style="height: 46px; border-radius: 48px;border-style: solid; border-width:0.5px;width: 100%; padding-right: 40px; padding-left: 10px;"
-                    id="dd">
-                <button class="fas fa-search btn"
-                    style="height: 46px; border-top-right-radius: 48px;border-bottom-right-radius: 48px;padding: 15px;font-size: 1.1em; position: absolute;right: 15px;border-left:0.5px solid lightgrey"></button>
-                <div class="row">
-                    <div>
-                        <button onclick="dropDown(event);" 
-                            style="border-radius: 48px;border:0.5px solid lightgrey; font-size: 0.9em;padding: 2px 10px;background-color: white;">
-                            Icon Style <i class="fas fa-angle-down"></i>
-                        </button>
-                        <div class="d-none shadow rounded menu"
-                            style="padding-top:10px;z-index: 200;margin-top: 4px;background-color: white;position:absolute;"
-                            id="menu1">
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="checkbox">&nbsp;
-                                    Solid</label></span>
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="checkbox">&nbsp;
-                                    Solid</label></span>
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="checkbox">&nbsp;
-                                    Solid</label></span>
-        
+            <form class="p-3">
+                <div class="col-12 col-md-8 container">
+                    <input id="search-bar">
+                    <button class="fas fa-search btn" id="search-btn"></button>
+                </div>
+                <br>
+                <div class="col-12 col-md-8 container">
+                    <div class="row col-11">
+                        <div>
+                            <button onclick="dropDown(event);" class="menu-btn" type="button">
+                                Menu 1 &#9013;
+                            </button>
+                            <div class="d-none shadow rounded menu">
+                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
+                                        Option 1</label></span>
+                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
+                                        Option 2</label></span>
+                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
+                                        Option 3</label></span>
+
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <button onclick="dropDown(event);" 
-                            style="border-radius: 48px;border:0.5px solid lightgrey; font-size: 0.9em;padding: 2px 10px;background-color: white;">
-                            Framework <i class="fas fa-angle-down"></i>
-                        </button>
-                        <div class="d-none shadow rounded menu"
-                            style="padding-top:10px;z-index: 200;margin-top: 4px;background-color: white;position: absolute;">
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="radio" name="menu1Options">&nbsp;
-                                    Solid</label></span>
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="radio" name="menu1Options">&nbsp;
-                                    Solid</label></span>
-                            <span style="padding: 6px 20px 6px;" class="d-block"><label><input type="radio" name="menu1Options">&nbsp;
-                                    Solid</label></span>
+                        <div>
+                            <button onclick="dropDown(event);" class="menu-btn" type="button">
+                                Menu 2 &#9013;
+                            </button>
+                            <div class="d-none shadow rounded menu">
+                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
+                                        Option 1</label></span>
+                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
+                                        Option 2</label></span>
+                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
+                                        Option 3</label></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-none" id="overlay" onclick="hide(event)" style="position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;z-index: 199;"></div>
+                <div class="d-none" id="overlay" onclick="hide(event)"></div>
+            </form>
+            <script>
+                function dropDown(event) {
+                    event.target.parentElement.children[1].classList.remove("d-none");
+                    document.getElementById("overlay").classList.remove("d-none");
+                }
+                function hide(event) {
+                    var items = document.getElementsByClassName('menu');
+                    for (let i = 0; i < items.length; i++) {
+                        items[i].classList.add("d-none");
+                    }
+                    document.getElementById("overlay").classList.add("d-none");
+                }
+
+            </script>
+            <hr>
+
             <div>
-                <script>
-                    function dropDown(event) {
-                        event.target.parentElement.children[1].classList.remove("d-none");
-                        document.getElementById("overlay").classList.remove("d-none");
-                    }
-                    function hide(event) {
-                        var items = document.getElementsByClassName('menu');
-                        for (let i = 0; i < items.length; i++) {
-                            items[i].classList.add("d-none");
-                        }
-                        document.getElementById("overlay").classList.add("d-none");
-                    }
-
-                </script>
-                <br>
-                <hr>
-
-                <div>
-                    <div class="row d-flex justify-content-center">
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-icons fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Icon Packs
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fab fa-css3-alt fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                CSS Frameworks
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-users fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Users
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-paw fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Animals
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-virus fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Coronavirus
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-icons fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Icon Packs
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fab fa-css3-alt fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                CSS Frameworks
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-users fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Users
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-paw fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Animals
-                            </p>
-                        </a>
-                        <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                            <span class="fa-stack fa-4x btn">
-                                <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                                <i class="fas fa-virus fa-stack-1x"></i>
-                            </span>
-                            <p style="line-height: 2.5;">
-                                Coronavirus
-                            </p>
-                        </a>
-                    </div>
+                <div class="row d-flex justify-content-center">
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-icons fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Icon Packs
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fab fa-css3-alt fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            CSS Frameworks
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-users fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Users
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-paw fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Animals
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-virus fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Coronavirus
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-icons fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Icon Packs
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fab fa-css3-alt fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            CSS Frameworks
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-users fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Users
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-paw fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Animals
+                        </p>
+                    </a>
+                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
+                        <span class="fa-stack fa-4x btn">
+                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
+                            <i class="fas fa-virus fa-stack-1x"></i>
+                        </span>
+                        <p style="line-height: 2.5;">
+                            Coronavirus
+                        </p>
+                    </a>
+                </div>
         </section>
 
         <footer style="padding:3%;background-color:#314E55; color:white; " class="text-center">
