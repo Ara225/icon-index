@@ -15,9 +15,11 @@
     "jest": "^25.5.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-sns": "1.51.0",
-    "@aws-cdk/aws-sns-subscriptions": "1.51.0",
-    "@aws-cdk/aws-sqs": "1.51.0",
+    "@aws-cdk/aws-apigateway": "^1.67.0",
+    "@aws-cdk/aws-dynamodb": "^1.67.0",
+    "@aws-cdk/aws-lambda": "^1.67.0",
+    "@aws-cdk/aws-s3": "^1.67.0",
+    "@aws-cdk/aws-s3-deployment": "^1.67.0",
     "@aws-cdk/core": "1.51.0"
   }
 }
