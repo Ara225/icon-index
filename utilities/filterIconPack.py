@@ -30,47 +30,8 @@ for iconPack in iconPacks:
                           "prefix": iconPack["prefix"].replace("-", "")
                          }
             if not iconList.get(iconRecord["plainName"].lower()):
-                iconList[iconRecord["plainName"].lower()] = {"icons": [], "related": []}
+                iconList[iconRecord["plainName"].lower()] = {"icons": []}
             iconList[iconRecord["plainName"].lower()]["icons"] += [iconRecord]
-            # Don't bother with synonyms for brand names
-            if "brand" in iconPack["name"].lower():
-                continue
-            foundSynonyms = False
-            # Look for synonyms for the whole word
-            word = splitRule[0].replace(iconPack["prefix"], "").replace("-", " ")
-            if dictionary.get(word[0].upper()):
-                for dictionaryRecord in dictionary[word[0].upper()]:
-                    if dictionaryRecord.lower() == word:
-                        if dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"] == []:
-                            break
-                        else: 
-                            foundSynonyms = True
-                        for i in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]:
-                            if word.lower() != i.lower():
-                                if not iconList.get(i.replace(" ", "-").lower()):
-                                    iconList[i.replace(" ", "-").lower()] = {"icons": [], "related": []}
-                                iconList[i.replace(" ", "-").lower()]["icons"] += [iconRecord]
-                                if iconList[i.replace(" ", "-").lower()]["related"] == []:
-                                    iconList[i.replace(" ", "-").lower()]["related"] += [synonym.lower().replace("-", "") for synonym in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]]
-                                if iconList[iconRecord["plainName"].lower()]["related"] == []:
-                                    iconList[iconRecord["plainName"].lower()]["related"] += [synonym.lower().replace("-", "") for synonym in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]]
-                        break
-            
-            if not foundSynonyms:
-                word = splitRule[0].replace(iconPack["prefix"], "").split("-")[0]
-                if dictionary.get(word[0].upper()):
-                    for dictionaryRecord in dictionary[word[0].upper()]:
-                        if dictionaryRecord.lower() == word:
-                            for i in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]:
-                                if word.lower() != i.lower():
-                                    if not iconList.get(i.replace(" ", "-").lower()):
-                                        iconList[i.replace(" ", "-").lower()] = {"icons": [], "related": []}
-                                    iconList[i.replace(" ", "-").lower()]["icons"] += [iconRecord]
-                                    if iconList[i.replace(" ", "-").lower()]["related"] == []:
-                                        iconList[i.replace(" ", "-").lower()]["related"] += [synonym.lower().replace("-", "") for synonym in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]] 
-                                    if iconList[iconRecord["plainName"].lower()]["related"] == []:
-                                        iconList[iconRecord["plainName"].lower()]["related"] += [synonym.lower().replace("-", "") for synonym in dictionary[word[0].upper()][dictionaryRecord]["SYNONYMS"]]
-                            break
     count += 1
 
 with open("icons.json", "w", encoding="utf8") as f:
