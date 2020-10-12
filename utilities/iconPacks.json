@@ -1,0 +1,31 @@
+[
+    {
+        "name": "Font Awesome Brands",
+        "version": "5.14.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css",
+        "fileURL": "brand.css",
+        "prefix": "fa-",
+        "class": "fab",
+        "features": [{"name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')"}],
+        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+    },
+    {
+        "name": "Font Awesome Other",
+        "version": "5.14.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css",
+        "fileURL": "other.css",
+        "prefix": "fa-",
+        "class": "fas",
+        "features": [{"name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')"}],
+        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+    },
+    {
+        "name": "Material Design Icons",
+        "version": "5.4.55",
+        "url": "http://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css",
+        "prefix": "mdi-",
+        "class": "mdi",
+        "features": [],
+        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+    }
+]
