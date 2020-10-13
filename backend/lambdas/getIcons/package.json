@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.771.0"
+    "fuse.js": "^6.4.1"
   }
 }
