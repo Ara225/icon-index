@@ -2,24 +2,17 @@ const dynamodb = require('@aws-cdk/aws-dynamodb');
 const cdk = require('@aws-cdk/core');
 const apigateway = require('@aws-cdk/aws-apigateway');
 const lambda = require('@aws-cdk/aws-lambda');
+const fs = require('fs');
 
 class InfrastructureStack extends cdk.Stack {
   /**
    * @param {cdk.App} scope
    * @param {string} id
-   * @param {cdk.StackProps=} props
+   * @param {cdk.StackProps} props
    */
   constructor(scope, id, props) {
     super(scope, id, props);
-
-    // Create a dynamodb table for the resource
-    let iconsTable = new dynamodb.Table(
-      this, "iconsTable", {
-      partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
-      readCapacity: 2,
-      writeCapacity: 2,
-      billingMode: dynamodb.BillingMode.PROVISIONED
-    })
+    fs.copyFileSync("../Utilities/icons.json", '../backend/lambdas/getIcons/icons.json')
        var api = new apigateway.RestApi(this, 'APIAllSorts', {
          restApiName: 'APIAllSorts',
          defaultCorsPreflightOptions: {
