@@ -11,7 +11,7 @@ for i in os.listdir("./data"):
     
 with open("iconPacks.json", encoding="utf8") as f:
     iconPacks = json.loads(f.read())
-iconList = {}
+iconList = []
 count = 0
 for iconPack in iconPacks:
     if iconPack.get("fileURL"):
@@ -26,12 +26,10 @@ for iconPack in iconPacks:
         else:
             splitRule = cssRule.replace(".", "").replace('"', "").replace("::", ":").split(":before{content:")
             iconRecord = {"className": iconPack["class"] + " " + splitRule[0], "charName": splitRule[1], "frameworkID": count,
-                          "plainName": splitRule[0].replace(iconPack["prefix"], ""),
+                          "id": splitRule[0].replace(iconPack["prefix"], "").replace("-", " "),
                           "prefix": iconPack["prefix"].replace("-", "")
                          }
-            if not iconList.get(iconRecord["plainName"].lower()):
-                iconList[iconRecord["plainName"].lower()] = {"icons": []}
-            iconList[iconRecord["plainName"].lower()]["icons"] += [iconRecord]
+            iconList.append(iconRecord)
     count += 1
 
 with open("icons.json", "w", encoding="utf8") as f:
