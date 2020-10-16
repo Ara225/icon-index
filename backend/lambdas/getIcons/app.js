@@ -16,10 +16,12 @@ module.exports.handler = function (event, context) {
         objectToReturn.body = JSON.stringify({"error": "No keywords supplied"})
         return objectToReturn;
     }
-    else if (!isNaN(event.queryStringParameters.frameworkID) && event.queryStringParameters.frameworkID != 0) {
-        objectToReturn.statusCode = 500;
-        objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
-        return objectToReturn;
+    else if (event.queryStringParameters.frameworkID != undefined && typeof event.queryStringParameters.frameworkID == "string") {
+        if (event.queryStringParameters.frameworkID.match('[^0-9,]').length > 0) {
+            objectToReturn.statusCode = 500;
+            objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
+            return objectToReturn;
+        }
     }
     let list = require("./icons.json");
     const options = {
@@ -39,4 +41,3 @@ module.exports.handler = function (event, context) {
     objectToReturn.body = JSON.stringify(result);
     return objectToReturn;
 }
-console.log(module.exports.handler({queryStringParameters: { keywords: "font", frameworkID: 0 }}))
