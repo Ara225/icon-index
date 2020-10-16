@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^25.5.0"
+  }
+}
