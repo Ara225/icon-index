@@ -1,6 +1,7 @@
 const Fuse = require("fuse.js");
 
 module.exports.handler = async function (event, context) {
+    let requestBody = JSON.parse(event.body);
     let objectToReturn = {
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type',
@@ -11,13 +12,13 @@ module.exports.handler = async function (event, context) {
         "body": ""
     };
     
-    if (!event.queryStringParameters || !event.queryStringParameters.keywords) {
+    if (!requestBody || !requestBody.keywords) {
         objectToReturn.statusCode = 500;
         objectToReturn.body = JSON.stringify({"error": "No keywords supplied"})
         return objectToReturn;
     }
-    else if (event.queryStringParameters.frameworkIDs != undefined && typeof event.queryStringParameters.frameworkIDs == "string") {
-        if (event.queryStringParameters.frameworkIDs.match('[^0-9,]')) {
+    else if (requestBody.frameworkIDs != undefined && typeof requestBody.frameworkIDs == "string") {
+        if (requestBody.frameworkIDs.match('[^0-9,]')) {
             objectToReturn.statusCode = 500;
             objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
             return objectToReturn;
@@ -34,9 +35,9 @@ module.exports.handler = async function (event, context) {
 
     const fuse = new Fuse(list, options);
 
-    let result = fuse.search(event.queryStringParameters.keywords);
-    if (event.queryStringParameters.frameworkIDs != undefined) {
-        let frameworkIDs = event.queryStringParameters.frameworkIDs.split(",");
+    let result = fuse.search(requestBody.keywords);
+    if (requestBody.frameworkIDs != undefined) {
+        let frameworkIDs = requestBody.frameworkIDs.split(",");
         result = result.filter((value) => {return frameworkIDs.indexOf(value.item.frameworkID.toString()) != -1;});
     }
     objectToReturn.body = JSON.stringify(result);
