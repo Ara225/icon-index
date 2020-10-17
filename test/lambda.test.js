@@ -2,25 +2,25 @@ const { Console } = require('console');
 const getIcons = require('../backend/lambdas/getIcons/app');
 
 test('getIcons: Call with invalid framework ID', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "font", "frameworkIDs": "font" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkID: "font" } });
     expect(icons.statusCode).toEqual(500);
     expect(JSON.parse(icons.body).error).toEqual("Invalid framework ID supplied");
 });
 
 test('getIcons: Call with (another) invalid framework ID', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "font", "frameworkIDs": "666dd" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkID: "666dd" } });
     expect(icons.statusCode).toEqual(500);
     expect(JSON.parse(icons.body).error).toEqual("Invalid framework ID supplied");
 });
 
 test('getIcons: Call with no framework ID', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "font" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font" } });
     expect(icons.statusCode).toEqual(200);
     expect(JSON.parse(icons.body)[0].item.className).toBeDefined();
 });
 
 test('getIcons: Call with a valid framework ID', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "font", "frameworkIDs": "0" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkID: "0" } });
     expect(icons.statusCode).toEqual(200);
     let iconsList = JSON.parse(icons.body);
     expect(iconsList[0].item.className).toBeDefined();
@@ -30,7 +30,7 @@ test('getIcons: Call with a valid framework ID', async () => {
 });
 
 test('getIcons: Call with multiple frameworkIDs', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "font", "frameworkIDs": "0,2" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkID: "0,2" } });
     expect(icons.statusCode).toEqual(200);
     let iconsList = JSON.parse(icons.body);
     expect(iconsList[0].item.className).toBeDefined();
@@ -46,13 +46,13 @@ test('getIcons: Call with multiple frameworkIDs', async () => {
 });
 
 test('getIcons: Call with null queryStringParameters', async () => {
-    let icons = await getIcons.handler({ body: null });
+    let icons = await getIcons.handler({ queryStringParameters: null });
     expect(icons.statusCode).toEqual(500);
     expect(JSON.parse(icons.body).error).toEqual("No keywords supplied");
 });
 
 test('getIcons: Call with empty keywords parameter', async () => {
-    let icons = await getIcons.handler({ body: '{ "keywords": "" }' });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "" } });
     expect(icons.statusCode).toEqual(500);
     expect(JSON.parse(icons.body).error).toEqual("No keywords supplied");
 });
