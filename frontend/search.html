@@ -50,7 +50,7 @@
             </div>
         </nav>
         <section class="container-flex  text-left" style=" color:#314E55; padding: 3%">
-            <form class="p-3">
+            <form class="p-3" onsubmit="onFormSubmit(event);return false;">
                 <div class="col-12 col-md-8 container">
                     <input id="search-bar">
                     <button class="fas fa-search btn" id="search-btn"></button>
@@ -60,29 +60,13 @@
                     <div class="row col-11">
                         <div>
                             <button onclick="dropDown(event);" class="menu-btn" type="button">
-                                Menu 1 &#9013;
+                                Frameworks &#9013;
                             </button>
                             <div class="d-none shadow rounded menu">
-                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
-                                        Option 1</label></span>
-                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
-                                        Option 2</label></span>
-                                <span class="d-block menu-option"><label><input type="checkbox">&nbsp;
-                                        Option 3</label></span>
-
-                            </div>
-                        </div>
-                        <div>
-                            <button onclick="dropDown(event);" class="menu-btn" type="button">
-                                Menu 2 &#9013;
-                            </button>
-                            <div class="d-none shadow rounded menu">
-                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
-                                        Option 1</label></span>
-                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
-                                        Option 2</label></span>
-                                <span class="d-block menu-option"><label><input type="radio" name="menuOptions">&nbsp;
-                                        Option 3</label></span>
+                                <span class="d-block menu-option"><label><input type="checkbox" id="FontAwesome" value="0,1" name="frameworks">&nbsp;
+                                        Font Awesome</label></span>
+                                <span class="d-block menu-option"><label><input type="checkbox" id="MaterialDesignIcons" value="2" name="frameworks">&nbsp;
+                                    Material Design Icons</label></span>
                             </div>
                         </div>
                     </div>
