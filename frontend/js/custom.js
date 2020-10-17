@@ -31,12 +31,11 @@ function copyToClipboard(event) {
 } 
 
 /**
- * Parses a collection of HTML elements into JSON. Each element has it's ID as the key and the content of it's value 
- * attribute as the value. 
+ * Parses a collection of HTML elements into a URL.
  * @param {HTMLCollection} form Collection of objects to parse in to JSON
  */
-function formToJSON(form) {
-    var data = {}
+function formToURL(form) {
+    var data = "";
     for (var i = 0; i < form.length; i++) {
         // This allows us to skip fields in the input if we need to
         console.log(form[i])
@@ -53,14 +52,17 @@ function formToJSON(form) {
                     // Code to handle groups of checkboxes as one
                     if (form[i].name) {
                         let selected = document.querySelectorAll('input[name="'+ form[i].name + '"]:checked');
+                        if (selected.length == 0) {
+                            continue
+                        }
                         let values = [];
                         for (let index = 0; index < selected.length; index++) {
                             values.push(selected[index].value);
                         }
-                        data[form[i].name] = values.toString();
+                        data += "&" + encodeURIComponent(form[i].name) + "=" + encodeURIComponent(values.toString());
                     }
                     else {
-                        data[form[i].id] = form[i].checked;
+                        data += "&" + encodeURIComponent(form[i].id) + "=" + form[i].checked;
                     }
                 }
                 else if (form[i].type == "radio") {
@@ -70,14 +72,15 @@ function formToJSON(form) {
                         alert("Unable to validate form. Please ensure all required fields are completed")
                         return false;
                     }
-                    data[form[i].name] = selectedRadioButton;
+                    data += "&" + encodeURIComponent(form[i].name) + "=" + encodeURIComponent(selectedRadioButton);
                 }
                 else {
-                    data[form[i].id] = form[i].value;
+                    data += "&" + encodeURIComponent(form[i].id) + "=" + encodeURIComponent(form[i].value);
                 }
             }
         }
     }
+    data = data.slice(1, data.length);
     return data;
 }
 
@@ -87,18 +90,16 @@ function formToJSON(form) {
  */
 async function onFormSubmit(event) {
     try {
-        var form = formToJSON(event.target);
-        console.log(form)
-        if (!form) {
-            return false;
-        }
-        var res = await fetch("https://example.com/api", {method: "POST", body: JSON.stringify(form)});
+        let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + formToURL(event.target).replace("search-bar", "keywords");
+        var res = await fetch(url);
         var jsonResult = await res.json();
         if (res.status != 200) {
             alert("The endpoint returned a status code other than 200")
             console.log(jsonResult);
             return false;
         }
+        console.log(jsonResult);
+        console.log((new Date()).valueOf());
         alert("Success")
         return true;
     }
