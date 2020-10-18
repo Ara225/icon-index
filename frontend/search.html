@@ -63,127 +63,95 @@
                                 Frameworks &#9013;
                             </button>
                             <div class="d-none shadow rounded menu">
-                                <span class="d-block menu-option"><label><input type="checkbox" id="FontAwesome" value="0,1" name="frameworks">&nbsp;
+                                <span class="d-block menu-option"><label><input type="checkbox" id="FontAwesome"
+                                            value="0,1" name="frameworks">&nbsp;
                                         Font Awesome</label></span>
-                                <span class="d-block menu-option"><label><input type="checkbox" id="MaterialDesignIcons" value="2" name="frameworks">&nbsp;
-                                    Material Design Icons</label></span>
+                                <span class="d-block menu-option"><label><input type="checkbox" id="MaterialDesignIcons"
+                                            value="2" name="frameworks">&nbsp;
+                                        Material Design Icons</label></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-none" id="overlay" onclick="hide(event)"></div>
             </form>
-            <script>
-                function dropDown(event) {
-                    event.target.parentElement.children[1].classList.remove("d-none");
-                    document.getElementById("overlay").classList.remove("d-none");
-                }
-                function hide(event) {
-                    var items = document.getElementsByClassName('menu');
-                    for (let i = 0; i < items.length; i++) {
-                        items[i].classList.add("d-none");
-                    }
-                    document.getElementById("overlay").classList.add("d-none");
-                }
-
-            </script>
             <hr>
+            <div class="row d-flex justify-content-center" id="tiles" style="background-color: white;min-height: 55vh;">
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content text-center">
+                        <div class="modal-body container-flex">
+                            <i class="" id="icon" style="font-size: 200px"></i>
+                            <h4 id="iconTagLine">
+                            </h4>
+                            <div class="row">
+                                <p class="text-left col-12 col-md-6">
+                                    Load Icon Pack <button onclick="copyToClipboard(event)"
+                                        style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
+                                        class="btn btn-info">Copy</button>
+                                    <br>
+                                    <input value="" style="box-shadow: none;" id="loadIconPack"
+                                        class="form-control">
+                                </p>
+                                <p class="text-left col-12 col-md-6">
+                                    Insert <button onclick="copyToClipboard(event)"
+                                        style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
+                                        class="btn btn-info">Copy</button>
+                                    <br>
+                                    <input value="" style="box-shadow: none;" id="loadIcon" class="form-control">
+                                </p>
+                            </div>
+                            <h5>Styles</h5>
+                            <div class="row">
+                                <p class="text-left col-12 col-md-6" id="iconLooks">
+                                    <label>
+                                        Looks
+                                    </label>
+                                    <input class="form-control" type="color">
+                                </p>
+                                <p class="text-left col-12 col-md-6" id="iconBehavior">
+                                    <label>
+                                        Behaviour
+                                    </label>
+                                    <button class="btn btn-outline-info d-block w-100">
+                                        Spin
+                                    </button>
+                                </p>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <a role="button" href="#">
+                                    <span class="fa-stack fa-1x">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="text-center">
+                                <a role="button" href="#" style="position: absolute; left: -8px; bottom:0px">
+                                    <span class="fa-stack fa-2x">
+                                        <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
+                                        <i class="fas fa-angle-left fa-stack-1x" style="color:black"></i>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="text-center">
+                                <a role="button" href="#" style="position: absolute; right: -8px; bottom:0px">
+                                    <span class="fa-stack fa-2x">
+                                        <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
+                                        <i class="fas fa-angle-right fa-stack-1x" style="color:black"></i>
+                                    </span>
+                                </a>
+                            </div>
 
-            <div>
-                <div class="row d-flex justify-content-center">
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-icons fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Icon Packs
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fab fa-css3-alt fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            CSS Frameworks
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-users fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Users
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-paw fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Animals
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-virus fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Coronavirus
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-icons fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Icon Packs
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fab fa-css3-alt fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            CSS Frameworks
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-users fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Users
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-paw fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Animals
-                        </p>
-                    </a>
-                    <a title="Click to try out this endpoint" href="#" class="card text-center" style="margin: 1%;">
-                        <span class="fa-stack fa-4x btn">
-                            <i class="fa fa-circle fa-stack-2x" style="color:white;"></i>
-                            <i class="fas fa-virus fa-stack-1x"></i>
-                        </span>
-                        <p style="line-height: 2.5;">
-                            Coronavirus
-                        </p>
-                    </a>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
         </section>
-
         <footer style="padding:3%;background-color:#DAE0E6;" class="text-center">
             Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a>
         </footer>
