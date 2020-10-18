@@ -39,6 +39,6 @@ module.exports.handler = async function (event, context) {
         let frameworkIDs = event.queryStringParameters.frameworkIDs.split(",");
         result = result.filter((value) => {return frameworkIDs.indexOf(value.item.frameworkID.toString()) != -1;});
     }
-    objectToReturn.body = JSON.stringify(result);
+    objectToReturn.body = { items: JSON.stringify(result)};
     return objectToReturn;
 }
