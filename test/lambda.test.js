@@ -61,19 +61,20 @@ test('getIcons: Call with empty keywords parameter', async () => {
 });
 
 test('getIcons: Call with extended search enabled', async () => {
-    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: true } });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: "true" } });
     expect(icons.statusCode).toEqual(200);
-    expect(JSON.parse(icons.body.items).length).toEqual(2);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(2);
+
 });
 
 test('getIcons: Call with fuzzy search enabled', async () => {
-    let icons = await getIcons.handler({ queryStringParameters: { keywords: "autoprefixer", frameworkIDs: "0", fuzzySearch: true } });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "gbhud", frameworkIDs: "0", fuzzyMatch: "true" } });
     expect(icons.statusCode).toEqual(200);
-    expect(JSON.parse(icons.body.items).length).toBeGreaterThan(2);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toBeGreaterThan(2);
 });
 
 test('getIcons: Call with fuzzy search and extended search enabled', async () => {
-    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: true, fuzzySearch: true } });
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: "true", fuzzyMatch: "true" } });
     expect(icons.statusCode).toEqual(200);
-    expect(JSON.parse(icons.body.items).length).toBeGreaterThan(2);
+    expect(JSON.parse(icons.body).items.length).toBeGreaterThan(2);
 });

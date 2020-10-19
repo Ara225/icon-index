@@ -12,7 +12,6 @@ module.exports.handler = async function (event, context) {
         "statusCode": 200,
         "body": ""
     };
-
     if (!event.queryStringParameters || !event.queryStringParameters.keywords) {
         objectToReturn.statusCode = 500;
         objectToReturn.body = JSON.stringify({"error": "No keywords supplied"})
@@ -27,11 +26,12 @@ module.exports.handler = async function (event, context) {
     }
 
     const options = {
-        includeScore: true,
+        includeScore: false,
         shouldSort: true,
-        threshold: 0.2,
+        threshold: event.queryStringParameters.fuzzyMatch == "true" ? 0.6 : 0.2,
         keys: ['id'],
-        ignoreLocation: true
+        ignoreLocation: true,
+        useExtendedSearch: event.queryStringParameters.extendedSearch  == "true"
     };
 
     const fuse = new Fuse(list, options);
