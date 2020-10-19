@@ -3,7 +3,7 @@
 * keywords
 * extendedSearch
 * frameworkIDs
-* iconStyle
+* iconStyle?
 * fuzzyMatch
 
 ```json

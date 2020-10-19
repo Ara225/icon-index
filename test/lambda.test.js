@@ -76,5 +76,24 @@ test('getIcons: Call with fuzzy search enabled', async () => {
 test('getIcons: Call with fuzzy search and extended search enabled', async () => {
     let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: "true", fuzzyMatch: "true" } });
     expect(icons.statusCode).toEqual(200);
-    expect(JSON.parse(icons.body).items.length).toBeGreaterThan(2);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toBeGreaterThan(2);
+});
+
+test('getIcons: Call with fuzzy search explicitly disabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik", frameworkIDs: "0"} });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(1);
+    expect(JSON.parse(JSON.parse(icons.body).items)[0].item.className).toEqual("fab fa-asymmetrik");
+});
+
+test('getIcons: Call with extended search explicitly disabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: "false" } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(0);
+});
+
+test('getIcons: Call with extended search and fuzzy search explicitly disabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: "false", fuzzyMatch: "false" } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(0);
 });
