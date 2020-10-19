@@ -59,6 +59,6 @@ module.exports.handler = async function (event, context) {
             }
         }
     }
-    objectToReturn.body = { items: JSON.stringify(result), frameworkURLs: JSON.stringify(frameworkURLs) };
+    objectToReturn.body = JSON.stringify({ items: JSON.stringify(result), frameworkURLs: JSON.stringify(frameworkURLs) });
     return objectToReturn;
 }

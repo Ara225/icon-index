@@ -16,24 +16,24 @@ test('getIcons: Call with (another) invalid framework ID', async () => {
 test('getIcons: Call with no framework ID', async () => {
     let icons = await getIcons.handler({ queryStringParameters: { keywords: "font" } });
     expect(icons.statusCode).toEqual(200);
-    expect(JSON.parse(icons.body.items)[0].item.className).toBeDefined();
+    expect(JSON.parse(JSON.parse(icons.body).items)[0].item.className).toBeDefined();
 });
 
 test('getIcons: Call with a valid framework ID', async () => {
     let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkIDs: "0" } });
     expect(icons.statusCode).toEqual(200);
-    let iconsList = JSON.parse(icons.body.items);
+    let iconsList = JSON.parse(JSON.parse(icons.body).items);
     expect(iconsList[0].item.className).toBeDefined();
     for (let icon = 0; icon < iconsList.length; icon++) {
         expect(iconsList[icon].item.frameworkID).toEqual(0);
     }
-    expect(icons.body.frameworkURLs).toContain("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/");
+    expect(JSON.parse(icons.body).frameworkURLs).toContain("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/");
 });
 
 test('getIcons: Call with multiple frameworkIDs', async () => {
     let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", frameworkIDs: "0,2" } });
     expect(icons.statusCode).toEqual(200);
-    let iconsList = JSON.parse(icons.body.items);
+    let iconsList = JSON.parse(JSON.parse(icons.body).items);
     expect(iconsList[0].item.className).toBeDefined();
     let includedFrameworks = [];
     for (let icon = 0; icon < iconsList.length; icon++) {
@@ -44,8 +44,8 @@ test('getIcons: Call with multiple frameworkIDs', async () => {
     }
     expect(includedFrameworks).toContain("0");
     expect(includedFrameworks).toContain("2");
-    expect(icons.body.frameworkURLs).toContain("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/");
-    expect(icons.body.frameworkURLs).toContain("http://cdn.materialdesignicons.com/");
+    expect(JSON.parse(icons.body).frameworkURLs).toContain("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/");
+    expect(JSON.parse(icons.body).frameworkURLs).toContain("http://cdn.materialdesignicons.com/");
 });
 
 test('getIcons: Call with null queryStringParameters', async () => {
