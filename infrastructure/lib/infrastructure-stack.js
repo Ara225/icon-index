@@ -13,6 +13,7 @@ class InfrastructureStack extends cdk.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
        fs.copyFileSync("../Utilities/icons.json", '../backend/lambdas/getIcons/icons.json')
+       fs.copyFileSync("../Utilities/iconPacks.json", '../backend/lambdas/getIcons/iconPacks.json')
        var api = new apigateway.RestApi(this, 'iconsIndex', {
          restApiName: 'iconsIndex',
          defaultCorsPreflightOptions: {
