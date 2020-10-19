@@ -59,3 +59,21 @@ test('getIcons: Call with empty keywords parameter', async () => {
     expect(icons.statusCode).toEqual(500);
     expect(JSON.parse(icons.body).error).toEqual("No keywords supplied");
 });
+
+test('getIcons: Call with extended search enabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: true } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(icons.body.items).length).toEqual(2);
+});
+
+test('getIcons: Call with fuzzy search enabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "autoprefixer", frameworkIDs: "0", fuzzySearch: true } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(icons.body.items).length).toBeGreaterThan(2);
+});
+
+test('getIcons: Call with fuzzy search and extended search enabled', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "asymmetrik|autoprefixer", frameworkIDs: "0", extendedSearch: true, fuzzySearch: true } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(icons.body.items).length).toBeGreaterThan(2);
+});
