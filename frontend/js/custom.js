@@ -90,8 +90,12 @@ function formToURL(form) {
  */
 async function onFormSubmit(event) {
     try {
+        let queryString = formToURL(event.target);
+        if (!queryString) {
+            return;
+        }
         document.getElementById("tiles").innerHTML = '<div class="text-center" style="padding-top:5%"><i class="fas fa-spinner fa-spin fa-3x"></i></div>';
-        let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + formToURL(event.target).replace("search-bar", "keywords");
+        let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + queryString.replace("search-bar", "keywords");
         var res = await fetch(url);
         var jsonResult = await res.json();
         if (res.status != 200) {
@@ -179,5 +183,11 @@ window.onclick = function (event) {
     var modal = document.getElementById('exampleModal');
     if (event.target == modal) {
         closeModal()
+    }
+}
+
+document.onload = function (event) {
+    if (document.getElementById("search-form")) {
+        document.getElementById("search-form").reset()
     }
 }

@@ -4,6 +4,7 @@
 * extendedSearch
 * frameworkIDs
 * iconStyle
+* fuzzyMatch
 
 ```json
 {
