@@ -24,7 +24,8 @@ module.exports.handler = async function (event, context) {
             return objectToReturn;
         }
     }
-
+    let startNum = event.queryStringParameters.startNum ? event.queryStringParameters.startNum : 0;
+    let totalResults = 0;
     const options = {
         includeScore: false,
         shouldSort: true,
@@ -50,8 +51,12 @@ module.exports.handler = async function (event, context) {
                 return true;
             }
         });
+        totalResults = result.length;
+        result = result.slice(startNum, 100);
     }
     else {
+        totalResults = result.length;
+        result = result.slice(startNum, 100);
         // Get the URLs to load the packs that have icons in the returned object
         for (let index = 0; index < result.length; index++) {
             if (frameworkURLs.indexOf(iconPacks[result[index].item.frameworkID].url) == -1) {
@@ -59,6 +64,12 @@ module.exports.handler = async function (event, context) {
             }
         }
     }
-    objectToReturn.body = JSON.stringify({ items: JSON.stringify(result), frameworkURLs: JSON.stringify(frameworkURLs) });
+    objectToReturn.body = JSON.stringify({ 
+                                             items: JSON.stringify(result), 
+                                             frameworkURLs: JSON.stringify(frameworkURLs),
+                                             totalResults: totalResults,
+                                             remainingResults: totalResults - (result.length + startNum),
+                                             startNum: startNum
+                                        });
     return objectToReturn;
 }
