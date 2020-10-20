@@ -97,3 +97,19 @@ test('getIcons: Call with extended search and fuzzy search explicitly disabled',
     expect(icons.statusCode).toEqual(200);
     expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(0);
 });
+
+test('getIcons: Call with keyword that returns more than a hundred results', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "as", fuzzyMatch: "true" } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(100);
+    expect(JSON.parse(icons.body).remainingResults).toBeGreaterThan(100);
+    expect(JSON.parse(icons.body).startNum).toEqual(0);
+});
+
+test('getIcons: Call with startNum', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { keywords: "font", startNum: 10 } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items)[0].item.className).not.toEqual("fas fa-font");
+    expect(JSON.parse(icons.body).startNum).toEqual(10);
+    expect(JSON.parse(icons.body).remainingResults).toEqual(0);
+});
