@@ -12,58 +12,74 @@ module.exports.handler = async function (event, context) {
         "statusCode": 200,
         "body": ""
     };
-    if (!event.queryStringParameters || !event.queryStringParameters.keywords) {
+    
+    if (!event.queryStringParameters) {
         objectToReturn.statusCode = 500;
-        objectToReturn.body = JSON.stringify({"error": "No keywords supplied"})
+        objectToReturn.body = JSON.stringify({"error": "No search filters supplied"})
         return objectToReturn;
     }
-    else if (event.queryStringParameters.frameworkIDs != undefined && typeof event.queryStringParameters.frameworkIDs == "string") {
-        if (event.queryStringParameters.frameworkIDs.match('[^0-9,]')) {
-            objectToReturn.statusCode = 500;
-            objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
-            return objectToReturn;
-        }
+    else if (event.queryStringParameters.frameworkIDs != undefined && event.queryStringParameters.frameworkIDs.match('[^0-9,]')) {
+        objectToReturn.statusCode = 500;
+        objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
+        return objectToReturn;
     }
     let startNum = event.queryStringParameters.startNum ? event.queryStringParameters.startNum : 0;
     let totalResults = 0;
-    const options = {
-        includeScore: false,
-        shouldSort: true,
-        threshold: event.queryStringParameters.fuzzyMatch == "true" ? 0.6 : 0.2,
-        keys: ['id'],
-        ignoreLocation: true,
-        useExtendedSearch: event.queryStringParameters.extendedSearch  == "true"
-    };
-
-    const fuse = new Fuse(list, options);
-
-    let result = fuse.search(event.queryStringParameters.keywords);
-    let frameworkURLs = [];
-    // Filter results based on framework (if frameworkIDs query string param is provided)
-    if (event.queryStringParameters.frameworkIDs != undefined) {
-        let frameworkIDs = event.queryStringParameters.frameworkIDs.split(",");
-        result = result.filter((value) => {
-            if (frameworkIDs.indexOf(value.item.frameworkID.toString()) != -1) {
-                // Get the URLs to load the packs that have icons in the returned object
-                if (frameworkURLs.indexOf(iconPacks[value.item.frameworkID].url) == -1) {
-                    frameworkURLs.push(iconPacks[value.item.frameworkID].url);
+    if (event.queryStringParameters.keywords) {
+        const options = {
+            includeScore: false,
+            shouldSort: true,
+            threshold: event.queryStringParameters.fuzzyMatch == "true" ? 0.6 : 0.2,
+            keys: ['id'],
+            ignoreLocation: true,
+            useExtendedSearch: event.queryStringParameters.extendedSearch == "true"
+        };
+    
+        const fuse = new Fuse(list, options);
+    
+        var result = fuse.search(event.queryStringParameters.keywords);
+        if (event.queryStringParameters.frameworkIDs != undefined) {
+            let frameworkIDs = event.queryStringParameters.frameworkIDs.split(",");
+            result = result.filter((value) => {
+                if (frameworkIDs.indexOf(value.item.frameworkID.toString()) != -1) {
+                    return true;
                 }
-                return true;
-            }
-        });
-        totalResults = result.length;
-        result = result.slice(startNum, 100);
-    }
-    else {
-        totalResults = result.length;
-        result = result.slice(startNum, 100);
-        // Get the URLs to load the packs that have icons in the returned object
-        for (let index = 0; index < result.length; index++) {
-            if (frameworkURLs.indexOf(iconPacks[result[index].item.frameworkID].url) == -1) {
-                frameworkURLs.push(iconPacks[result[index].item.frameworkID].url);
-            }
+            });
+            totalResults = result.length;
+            result = result.slice(startNum, 100);
         }
     }
+    else if (event.queryStringParameters.frameworkIDs != undefined) {
+        const options = {
+            includeScore: false,
+            shouldSort: true,
+            threshold: 0.2,
+            keys: ['frameworkID'],
+            ignoreLocation: true,
+            useExtendedSearch: true
+        };
+    
+        const fuse = new Fuse(list, options);
+    
+        var result = fuse.search(event.queryStringParameters.frameworkIDs.replace(/,/g, "|"));
+    }
+    else {
+        objectToReturn.statusCode = 500;
+        objectToReturn.body = JSON.stringify({"error": "No search filters supplied"})
+        return objectToReturn;
+    }
+
+    let frameworkURLs = [];
+    totalResults = result.length;
+    result = result.slice(startNum, 100);
+    
+    // Get the URLs to load the packs that have icons in the returned object
+    for (let index = 0; index < result.length; index++) {
+        if (frameworkURLs.indexOf(iconPacks[result[index].item.frameworkID].url) == -1) {
+            frameworkURLs.push(iconPacks[result[index].item.frameworkID].url);
+        }
+    }
+
     objectToReturn.body = JSON.stringify({ 
                                              items: JSON.stringify(result), 
                                              frameworkURLs: JSON.stringify(frameworkURLs),
