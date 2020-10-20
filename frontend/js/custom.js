@@ -105,7 +105,7 @@ async function onFormSubmit(event) {
         }
         console.log(jsonResult);
         console.log((new Date()).valueOf());
-        populateSearchResults(jsonResult.items)
+        populateSearchResults(JSON.parse(jsonResult.items))
         return true;
     }
     catch (e) {
