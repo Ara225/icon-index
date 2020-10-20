@@ -5,6 +5,7 @@
 * frameworkIDs
 * iconStyle?
 * fuzzyMatch
+* startNum
 
 ```json
 {
@@ -24,7 +25,10 @@
     ],
     "frameworkURLs": [
         ""
-    ]
+    ],
+    "totalResults": 100,
+    "remainingResults": 10,
+    "startNum": 0
 }
 ```
 
