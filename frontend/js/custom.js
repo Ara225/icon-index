@@ -105,7 +105,13 @@ async function onFormSubmit(event) {
         }
         console.log(jsonResult);
         console.log((new Date()).valueOf());
-        populateSearchResults(JSON.parse(jsonResult.items))
+        populateSearchResults(JSON.parse(jsonResult.items));
+        var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
+        for (let index = 0; index < frameworkURLs.length; index++) {
+            if (!frameworkURLs[index].includes("https://cdnjs.cloudflare.com/ajax/libs/font-awesome")) {
+                document.body.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
+            }
+        }
         return true;
     }
     catch (e) {
@@ -147,9 +153,8 @@ let iconPacks = [
         "details": { "creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": [] }
     }
 ];
-function populateSearchResults(items) {
+async function populateSearchResults(items) {
     document.getElementById("tiles").innerHTML = "";
-    document.getElementById("tiles").style.minHeight = "";
     for (let item = 0; item < items.length; item++) {
         const element = items[item];
         let tiles = document.getElementById("tiles");
