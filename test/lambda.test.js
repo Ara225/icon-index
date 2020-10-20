@@ -51,13 +51,13 @@ test('getIcons: Call with multiple frameworkIDs', async () => {
 test('getIcons: Call with null queryStringParameters', async () => {
     let icons = await getIcons.handler({ queryStringParameters: null });
     expect(icons.statusCode).toEqual(500);
-    expect(JSON.parse(icons.body).error).toEqual("No keywords supplied");
+    expect(JSON.parse(icons.body).error).toEqual("No search filters supplied");
 });
 
 test('getIcons: Call with empty keywords parameter', async () => {
     let icons = await getIcons.handler({ queryStringParameters: { keywords: "" } });
     expect(icons.statusCode).toEqual(500);
-    expect(JSON.parse(icons.body).error).toEqual("No keywords supplied");
+    expect(JSON.parse(icons.body).error).toEqual("No search filters supplied");
 });
 
 test('getIcons: Call with extended search enabled', async () => {
@@ -112,4 +112,20 @@ test('getIcons: Call with startNum', async () => {
     expect(JSON.parse(JSON.parse(icons.body).items)[0].item.className).not.toEqual("fas fa-font");
     expect(JSON.parse(icons.body).startNum).toEqual(10);
     expect(JSON.parse(icons.body).remainingResults).toEqual(0);
+});
+
+test('getIcons: Call with just frameworkIDs', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { frameworkIDs: "2" } });
+    expect(icons.statusCode).toEqual(200);
+    expect(JSON.parse(JSON.parse(icons.body).items).length).toEqual(100);
+    expect(JSON.parse(icons.body).remainingResults).toBeGreaterThan(100);
+    expect(JSON.parse(icons.body).startNum).toEqual(0);
+    expect(JSON.parse(JSON.parse(icons.body).frameworkURLs)[0]).toContain("http://cdn.materialdesignicons.com/");
+    expect(JSON.parse(JSON.parse(icons.body).frameworkURLs).length).toEqual(1);
+});
+
+test('getIcons: Call with valid parameters but without frameworkIDs or keywords', async () => {
+    let icons = await getIcons.handler({ queryStringParameters: { extendedSearch: "true", fuzzyMatch: "true" } });
+    expect(icons.statusCode).toEqual(500);
+    expect(JSON.parse(icons.body).error).toEqual("No search filters supplied");
 });
