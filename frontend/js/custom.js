@@ -1,3 +1,6 @@
+var currentSearchURL = "";
+var currentSearchPage = 0;
+
 function displayMenu(event) {
     if (document.getElementById("navbar-list").classList.contains("show")) {
         document.getElementById("navbar-list").classList.remove("show")
@@ -94,12 +97,16 @@ async function onFormSubmit(event) {
         if (!queryString) {
             return;
         }
+        queryString = queryString.replace("search-bar", "keywords");
+        currentSearchURL = queryString;
+        currentSearchPage = 0;
         document.getElementById("tiles").innerHTML = '<div class="text-center" style="padding-top:5%"><i class="fas fa-spinner fa-spin fa-3x"></i></div>';
-        let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + queryString.replace("search-bar", "keywords");
+        document.getElementById("pagination").innerHTML = "";
+        let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + queryString;
         var res = await fetch(url);
         var jsonResult = await res.json();
         if (res.status != 200) {
-            alert("The endpoint returned a status code other than 200")
+            alert("The endpoint returned a status code other than 200");
             console.log(jsonResult);
             return false;
         }
@@ -108,9 +115,21 @@ async function onFormSubmit(event) {
         populateSearchResults(JSON.parse(jsonResult.items));
         var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
         for (let index = 0; index < frameworkURLs.length; index++) {
-            if (!frameworkURLs[index].includes("https://cdnjs.cloudflare.com/ajax/libs/font-awesome")) {
-                document.body.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
+            if (!document.head.innerHTML.includes(frameworkURLs[index])) {
+                document.head.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
             }
+        }
+        var pages = (jsonResult.remainingResults / 100);
+        if (jsonResult.remainingResults % 100) {
+            pages += 1;
+        }
+        let pagination = document.getElementById("pagination");
+        pagination.innerHTML += '<nav aria-label="..."><ul class="pagination" id="pagination-bar">' +
+                                '<li class="page-item active" onclick="handleNav(event)"><a class="page-link" href="#">1</a></li>'+
+                                '</ul></nav>';
+        pagination = document.getElementById("pagination-bar");
+        for (let index = 2; index < pages+1; index++) {
+            pagination.innerHTML += '<li class="page-item"  onclick="handleNav(event)"><a class="page-link" href="#">' + index.toString() + '</a></li>';
         }
         return true;
     }
@@ -182,6 +201,34 @@ function closeModal() {
     document.getElementById("backdrop").style.display = "none"
     document.getElementById("exampleModal").style.display = "none"
     document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
+}
+
+async function handleNav(event) {
+    let paginationButtons = document.getElementById("pagination-bar").children;
+    paginationButtons[currentSearchPage].classList.remove("active");
+    if (event.target.classList.contains("disabled") || event.target.classList.contains("active")) {
+        return;
+    }
+    currentSearchPage = Number(event.target.innerText)-1;
+    paginationButtons[currentSearchPage].classList.add("active");
+    document.getElementById("tiles").innerHTML = '<div class="text-center" style="padding-top:5%"><i class="fas fa-spinner fa-spin fa-3x"></i></div>';
+    let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + currentSearchURL + "&startNum=" + (currentSearchPage * 100).toString();
+    var res = await fetch(url);
+    var jsonResult = await res.json();
+    if (res.status != 200) {
+        alert("The endpoint returned a status code other than 200");
+        console.log(jsonResult);
+        return false;
+    }
+    console.log(jsonResult);
+    console.log((new Date()).valueOf());
+    populateSearchResults(JSON.parse(jsonResult.items));
+    var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
+    for (let index = 0; index < frameworkURLs.length; index++) {
+        if (!document.head.innerHTML.includes(frameworkURLs[index])) {
+            document.head.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
+        }
+    }
 }
 
 window.onclick = function (event) {
