@@ -23,7 +23,7 @@ module.exports.handler = async function (event, context) {
         objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
         return objectToReturn;
     }
-    let startNum = event.queryStringParameters.startNum ? event.queryStringParameters.startNum : 0;
+    let startNum = event.queryStringParameters.startNum ? Number(event.queryStringParameters.startNum) : 0;
     let totalResults = 0;
     if (event.queryStringParameters.keywords) {
         const options = {
@@ -46,7 +46,7 @@ module.exports.handler = async function (event, context) {
                 }
             });
             totalResults = result.length;
-            result = result.slice(startNum, 100);
+            result = result.slice(startNum, startNum + 100);
         }
     }
     else if (event.queryStringParameters.frameworkIDs != undefined) {
@@ -71,7 +71,7 @@ module.exports.handler = async function (event, context) {
 
     let frameworkURLs = [];
     totalResults = result.length;
-    result = result.slice(startNum, 100);
+    result = result.slice(startNum, startNum + 100);
     
     // Get the URLs to load the packs that have icons in the returned object
     for (let index = 0; index < result.length; index++) {
