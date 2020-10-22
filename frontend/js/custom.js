@@ -150,6 +150,7 @@ async function onFormSubmit(event) {
 
 async function populateSearchResults(items) {
     document.getElementById("tiles").innerHTML = "";
+    document.getElementById("searchHeader").innerHTML = '<h2 class="text-center" style="margin: 5% 0% 3%">' + items.length + ' Matching Results<hr style="width: 100px;border-width: 3px;"></h2>';
     for (let item = 0; item < items.length; item++) {
         const element = items[item];
         let tiles = document.getElementById("tiles");

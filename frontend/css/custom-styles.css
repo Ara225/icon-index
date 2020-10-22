@@ -1,24 +1,3 @@
-#search-bar {
-    height: 46px;
-    border-radius: 48px;
-    border: 0.5px solid lightgrey;
-    width: 100%;
-    padding-right: 40px;
-    padding-left: 10px;
-}
-
-#search-btn {
-    height: 46px;
-    border-top-right-radius: 48px;
-    border-bottom-right-radius: 48px;
-    padding: 15px;
-    font-size: 1.1em;
-    position: absolute;
-    right: 15px;
-    border-left: 0.5px solid lightgrey;
-    background-color: rgb(66, 133, 102);
-}
-
 .menu-btn {
     border-radius: 48px;
     border: 0.5px solid lightgrey;
