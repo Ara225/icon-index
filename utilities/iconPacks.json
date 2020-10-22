@@ -6,7 +6,8 @@
         "fileURL": "brand.css",
         "prefix": "fa-",
         "class": "fab",
-        "features": [{"name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')"}],
+        "animations": [{"name": "Spin", "class": "fa-spin", "JavaScript": "toggleFeature(event, 'fa-spin')"}],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
         "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
     },
     {
@@ -16,7 +17,8 @@
         "fileURL": "other.css",
         "prefix": "fa-",
         "class": "fas",
-        "features": [{"name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')"}],
+        "animations": [{"name": "Spin", "class": "fa-spin", "JavaScript": "toggleFeature(event, 'fa-spin')"}],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
         "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
     },
     {
@@ -25,7 +27,8 @@
         "url": "http://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css",
         "prefix": "mdi-",
         "class": "mdi",
-        "features": [],
+        "animations": [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
         "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
     }
 ]

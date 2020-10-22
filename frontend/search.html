@@ -110,46 +110,19 @@
                             <h5>Styles</h5>
                             <div class="row">
                                 <p class="text-left col-12 col-md-6" id="iconLooks">
-                                    <label>
-                                        Looks
-                                    </label>
-                                    <input class="form-control" type="color">
                                 </p>
                                 <p class="text-left col-12 col-md-6" id="iconBehavior">
-                                    <label>
-                                        Behaviour
-                                    </label>
-                                    <button class="btn btn-outline-info d-block w-100">
-                                        Spin
-                                    </button>
                                 </p>
                             </div>
                             <br>
-                            <div class="text-center">
-                                <a role="button" href="#">
-                                    <span class="fa-stack fa-1x">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <a role="button" href="#" style="position: absolute; left: -8px; bottom:0px">
-                                    <span class="fa-stack fa-2x">
-                                        <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
-                                        <i class="fas fa-angle-left fa-stack-1x" style="color:black"></i>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <a role="button" href="#" style="position: absolute; right: -8px; bottom:0px">
-                                    <span class="fa-stack fa-2x">
-                                        <i class="fas fa-circle fa-stack-2x" style="color: rgba(80, 82, 79, 0.2);"></i>
-                                        <i class="fas fa-angle-right fa-stack-1x" style="color:black"></i>
-                                    </span>
-                                </a>
-                            </div>
-
+                            <div class="row">
+                                <div class="col-12 col-sm-6 text-left">
+                                    <button class="btn btn-outline-success" id="leftNav" onclick="openModal(event, Number(currentDisplayedIcon)-1)">Last Icon</button>
+                                </div>
+                                <div class="col-12 col-sm-6 text-right">
+                                    <button class="btn btn-outline-success" id="rightNav" onclick="openModal(event, Number(currentDisplayedIcon)+1)">Next Icon</button>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>

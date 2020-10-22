@@ -1,6 +1,7 @@
 var currentSearchURL = "";
 var currentSearchPage = 0;
-
+var currentDisplayedIcon;
+var iconPacks;
 function displayMenu(event) {
     if (document.getElementById("navbar-list").classList.contains("show")) {
         document.getElementById("navbar-list").classList.remove("show")
@@ -93,6 +94,10 @@ function formToURL(form) {
  */
 async function onFormSubmit(event) {
     try {
+        if (!iconPacks) {
+            let res = await fetch("iconPacks.json");
+            iconPacks = await res.json();
+        }
         let queryString = formToURL(event.target);
         if (!queryString) {
             return;
@@ -120,18 +125,18 @@ async function onFormSubmit(event) {
             }
         }
         if (jsonResult.remainingResults) {
-        var pages = (jsonResult.remainingResults / 100);
-        if (jsonResult.remainingResults % 100) {
-            pages += 1;
-        }
-        let pagination = document.getElementById("pagination");
-        pagination.innerHTML += '<nav aria-label="..."><ul class="pagination" id="pagination-bar">' +
-                                '<li class="page-item active" onclick="handleNav(event)"><a class="page-link" href="#">1</a></li>'+
-                                '</ul></nav>';
-        pagination = document.getElementById("pagination-bar");
-        for (let index = 2; index < pages+1; index++) {
-            pagination.innerHTML += '<li class="page-item"  onclick="handleNav(event)"><a class="page-link" href="#">' + index.toString() + '</a></li>';
-        }
+            var pages = (jsonResult.remainingResults / 100);
+            if (jsonResult.remainingResults % 100) {
+                pages += 1;
+            }
+            let pagination = document.getElementById("pagination");
+            pagination.innerHTML += '<nav aria-label="..."><ul class="pagination" id="pagination-bar">' +
+                                    '<li class="page-item active" onclick="handleNav(event)"><a class="page-link" href="#">1</a></li>'+
+                                    '</ul></nav>';
+            pagination = document.getElementById("pagination-bar");
+            for (let index = 2; index < pages+1; index++) {
+                pagination.innerHTML += '<li class="page-item"  onclick="handleNav(event)"><a class="page-link" href="#">' + index.toString() + '</a></li>';
+            }
         }
         return true;
     }
@@ -143,44 +148,15 @@ async function onFormSubmit(event) {
     }
 }
 
-let iconPacks = [
-    {
-        "name": "Font Awesome Brands",
-        "version": "5.14.0",
-        "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css",
-        "fileURL": "brand.css",
-        "prefix": "fa-",
-        "class": "fab",
-        "features": [{ "name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')" }],
-        "details": { "creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": [] }
-    },
-    {
-        "name": "Font Awesome Other",
-        "version": "5.14.0",
-        "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css",
-        "fileURL": "other.css",
-        "prefix": "fa-",
-        "class": "fas",
-        "features": [{ "name": "Spinning Animation", "class": "fa-spin", "JavaScript": "turnOnFeature('fa-spin')" }],
-        "details": { "creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": [] }
-    },
-    {
-        "name": "Material Design Icons",
-        "version": "5.4.55",
-        "url": "http://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css",
-        "prefix": "mdi-",
-        "class": "mdi",
-        "features": [],
-        "details": { "creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": [] }
-    }
-];
 async function populateSearchResults(items) {
     document.getElementById("tiles").innerHTML = "";
     for (let item = 0; item < items.length; item++) {
         const element = items[item];
         let tiles = document.getElementById("tiles");
-        tiles.innerHTML += '<button class="btn" style="width: 12em; padding: 0em"  type="button" onclick="openModal(event, \'' +
-            element.item.frameworkID + '\', \'' + element.item.className + '\')">' +
+        
+        tiles.innerHTML += '<button data-frameworkID="' + element.item.frameworkID +'" data-className="' + element.item.className +
+            '" class="btn" style="width: 12em; padding: 0em"  type="button" id="' + item + '" onclick="openModal(event, \'' +
+             item + '\')">' +
             '    <div class="card-body text-center">' +
             '       <h1><i class="' + element.item.className + '"></i></h1>' +
             '       <span class="card-subtitle mb-2 text-muted" style="font-size:small">' +
@@ -190,11 +166,30 @@ async function populateSearchResults(items) {
             '</button>';
     }
 }
-function openModal(event, frameworkID, className) {
+function openModal(event, iconID) {
+    if (iconID < 0 || iconID > document.getElementById("tiles").childElementCount) {
+        return;
+    }
+    let frameworkID = document.getElementById(iconID).dataset.frameworkid;
+    let className = document.getElementById(iconID).dataset.classname;
     document.getElementById("icon").className = className;
     document.getElementById("iconTagLine").innerText = className.split(" ")[1] + " from " + iconPacks[frameworkID].name;
     document.getElementById("loadIconPack").value = '<link rel="stylesheet" href="' + iconPacks[frameworkID].url + '">';
     document.getElementById("loadIcon").value = '<i class="' + className + '"></i>';
+    document.getElementById("iconBehavior").innerHTML = "<label>Animations</label>"
+    for (let animation = 0; animation < iconPacks[frameworkID].animations.length; animation++) {
+        console.log(iconPacks[frameworkID].animations[animation])
+        document.getElementById("iconBehavior").innerHTML += '<button type="button" class="btn btn-outline-info d-block w-100" onclick="' +
+        iconPacks[frameworkID].animations[animation].JavaScript + '">' + iconPacks[frameworkID].animations[animation].name +
+        '</button>';
+    }
+    document.getElementById("iconLooks").innerHTML = "<label>Looks</label>"
+    for (let look = 0; look < iconPacks[frameworkID].looks.length; look++) {
+        console.log(iconPacks[frameworkID].looks[look])
+        document.getElementById("iconLooks").innerHTML += '<input type="' + iconPacks[frameworkID].looks[look].elementType + '" class="form-control" onchange="' +
+        iconPacks[frameworkID].looks[look].JavaScript + '">';
+    }
+    currentDisplayedIcon = iconID;
     document.getElementById("backdrop").style.display = "block"
     document.getElementById("exampleModal").style.display = "block"
     document.getElementById("exampleModal").className += "show"
@@ -244,4 +239,18 @@ document.onload = function (event) {
     if (document.getElementById("search-form")) {
         document.getElementById("search-form").reset()
     }
+}
+function toggleFeature(event, className) {
+    let initialClass = document.getElementById('icon').className;
+    if (!document.getElementById('icon').classList.contains(className)) {
+        document.getElementById('icon').classList.add(className)
+    }
+    else {
+        document.getElementById('icon').classList.remove(className)
+    }
+    document.getElementById('loadIcon').value = document.getElementById('loadIcon').value.replace(initialClass, document.getElementById('icon').className)
+}
+function changeIconColor(event) {
+    document.getElementById('icon').style.color = event.target.value
+    document.getElementById('loadIcon').value = '<i class="' + document.getElementById("icon").className + '" style="color:' + event.target.value + ';"></i>'
 }

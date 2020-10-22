@@ -107,3 +107,5 @@ utilities/data
 backend/lambdas/getIcons/icons.json
 utilities/icons.json
 backend/lambdas/getIcons/iconPacks.json
+frontend/iconPacks.json
+frontend/icons.json
