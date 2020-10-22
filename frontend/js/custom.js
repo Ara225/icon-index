@@ -119,6 +119,7 @@ async function onFormSubmit(event) {
                 document.head.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
             }
         }
+        if (jsonResult.remainingResults) {
         var pages = (jsonResult.remainingResults / 100);
         if (jsonResult.remainingResults % 100) {
             pages += 1;
@@ -130,6 +131,7 @@ async function onFormSubmit(event) {
         pagination = document.getElementById("pagination-bar");
         for (let index = 2; index < pages+1; index++) {
             pagination.innerHTML += '<li class="page-item"  onclick="handleNav(event)"><a class="page-link" href="#">' + index.toString() + '</a></li>';
+        }
         }
         return true;
     }
