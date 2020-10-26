@@ -23,9 +23,12 @@ module.exports.handler = async function (event, context) {
         objectToReturn.body = JSON.stringify({"error": "Invalid framework ID supplied"})
         return objectToReturn;
     }
+
     let startNum = event.queryStringParameters.startNum ? Number(event.queryStringParameters.startNum) : 0;
     let totalResults = 0;
+
     if (event.queryStringParameters.keywords) {
+        // Options for Fuse search
         const options = {
             includeScore: false,
             shouldSort: true,
@@ -38,6 +41,8 @@ module.exports.handler = async function (event, context) {
         const fuse = new Fuse(list, options);
     
         var result = fuse.search(event.queryStringParameters.keywords);
+
+        // Filter search by frameworkIDs if provided
         if (event.queryStringParameters.frameworkIDs != undefined) {
             let frameworkIDs = event.queryStringParameters.frameworkIDs.split(",");
             result = result.filter((value) => {
@@ -46,10 +51,12 @@ module.exports.handler = async function (event, context) {
                 }
             });
             totalResults = result.length;
+            // Limit number of returned results to 100
             result = result.slice(startNum, startNum + 100);
         }
     }
     else if (event.queryStringParameters.frameworkIDs != undefined) {
+        // Options for Fuse search
         const options = {
             includeScore: false,
             shouldSort: true,
@@ -71,6 +78,7 @@ module.exports.handler = async function (event, context) {
 
     let frameworkURLs = [];
     totalResults = result.length;
+    // Limit number of returned results to 100
     result = result.slice(startNum, startNum + 100);
     
     // Get the URLs to load the packs that have icons in the returned object

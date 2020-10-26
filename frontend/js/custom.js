@@ -3,20 +3,19 @@ var currentSearchPage = 0;
 var currentDisplayedIcon;
 var iconPacks;
 
-function displayMenu(event) {
-    if (document.getElementById("navbar-list").classList.contains("show")) {
-        document.getElementById("navbar-list").classList.remove("show")
-    }
-    else {
-        document.getElementById("navbar-list").classList.add("show")
-    }
-}
-
+/**
+ * Displays the custom drop down menu on the index page
+ * @param {Event} event 
+ */
 function dropDown(event) {
     event.target.parentElement.children[1].classList.remove("d-none");
     document.getElementById("overlay").classList.remove("d-none");
 }
 
+/**
+ * Hides the custom drop down menu menu
+ * @param {Event} event 
+ */
 function hide(event) {
     var items = document.getElementsByClassName('menu');
     for (let i = 0; i < items.length; i++) {
@@ -25,6 +24,10 @@ function hide(event) {
     document.getElementById("overlay").classList.add("d-none");
 }
 
+/**
+ * Used in icon modal to copy text
+ * @param {Event} event 
+ */
 function copyToClipboard(event) {
     /* Get the text field */
     var copyText = event.target.parentElement.children[2];
@@ -40,13 +43,12 @@ function copyToClipboard(event) {
 
 /**
  * Parses a collection of HTML elements into a URL.
- * @param {HTMLCollection} form Collection of objects to parse in to JSON
+ * @param {HTMLCollection} form Collection of objects to parse
  */
 function formToURL(form) {
     var data = "";
     for (var i = 0; i < form.length; i++) {
-        // This allows us to skip fields in the input if we need to
-        console.log(form[i])
+        // This allows us to skip fields in the input if we need to as well as skipping buttons
         if (form[i].id == "" || form[i].tagName == "BUTTON") {
             continue
         }
@@ -70,6 +72,7 @@ function formToURL(form) {
                         data += "&" + encodeURIComponent(form[i].name) + "=" + encodeURIComponent(values.toString());
                     }
                     else {
+                        // Single checkboxes
                         data += "&" + encodeURIComponent(form[i].id) + "=" + form[i].checked;
                     }
                 }
@@ -88,6 +91,7 @@ function formToURL(form) {
             }
         }
     }
+    // Remove extra &
     data = data.slice(1, data.length);
     return data;
 }
@@ -106,14 +110,15 @@ async function onFormSubmit(event) {
         if (!queryString) {
             return;
         }
-        queryString = queryString.replace("search-bar", "keywords");
         currentSearchURL = queryString;
         currentSearchPage = 0;
+        // Display loading spinner
         document.getElementById("tiles").innerHTML = '<div class="text-center" style="padding-top:5%"><i class="fas fa-spinner fa-spin fa-3x"></i></div>';
         document.getElementById("pagination").innerHTML = "";
         let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + queryString;
         var res = await fetch(url);
         var jsonResult = await res.json();
+        // Error handling
         if (res.status == 500 && jsonResult.error === "No search filters supplied") {
             document.getElementById("tiles").innerHTML = '<h2 class="text-center">Please pick either a framework or enter search terms</h2>';
             return false;
@@ -123,13 +128,16 @@ async function onFormSubmit(event) {
             document.getElementById("tiles").innerHTML += '<p class="text-center">' + res + '</p>';
             document.getElementById("tiles").innerHTML += '<p class="text-center">' + jsonResult + '</p>';
         }
+        // Put the search results into the page
         populateSearchResults(JSON.parse(jsonResult.items));
+        // Load in the required iconpacks/frameworks
         var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
         for (let index = 0; index < frameworkURLs.length; index++) {
             if (!document.head.innerHTML.includes(frameworkURLs[index])) {
                 document.head.innerHTML += '<link rel="stylesheet" href="' + frameworkURLs[index] + '">';
             }
         }
+        // Doing UI and maths for pagination
         if (jsonResult.remainingResults) {
             var pages = (jsonResult.remainingResults / 100);
             if (jsonResult.remainingResults % 100) {
@@ -155,13 +163,16 @@ async function onFormSubmit(event) {
     }
 }
 
+/**
+ * Place the search results on to the page. 
+ * @param {Array} items 
+ */
 async function populateSearchResults(items) {
     document.getElementById("tiles").innerHTML = "";
     document.getElementById("searchHeader").innerHTML = '<h2 class="text-center" style="margin: 5% 0% 3%">' + items.length + ' Matching Results<hr style="width: 100px;border-width: 3px;"></h2>';
     for (let item = 0; item < items.length; item++) {
         const element = items[item];
         let tiles = document.getElementById("tiles");
-        
         tiles.innerHTML += '<button data-frameworkID="' + element.item.frameworkID +'" data-className="' + element.item.className +
             '" class="btn" style="width: 12em; padding: 0em"  type="button" id="' + item + '" onclick="openModal(event, \'' +
              item + '\')">' +
@@ -175,12 +186,19 @@ async function populateSearchResults(items) {
     }
 }
 
+/**
+ * Open a modal populated with the information about the icon
+ * @param {Event} event 
+ * @param {Number} iconID The ID of the icon (number of element on page)
+ */
 function openModal(event, iconID) {
+    // If we're trying to view icons that don't exist
     if (iconID < 0 || iconID > document.getElementById("tiles").childElementCount) {
         return;
     }
     let frameworkID = document.getElementById(iconID).dataset.frameworkid;
     let className = document.getElementById(iconID).dataset.classname;
+    // populate icon details 
     document.getElementById("icon").className = className;
     document.getElementById("iconTagLine").innerText = className.split(" ")[1] + " from " + iconPacks[frameworkID].name;
     document.getElementById("loadIconPack").value = '<link rel="stylesheet" href="' + iconPacks[frameworkID].url + '">';
@@ -198,6 +216,7 @@ function openModal(event, iconID) {
         document.getElementById("iconLooks").innerHTML += '<input type="' + iconPacks[frameworkID].looks[look].elementType + '" class="form-control" onchange="' +
         iconPacks[frameworkID].looks[look].JavaScript + '">';
     }
+    // Icon pack details
     document.getElementById("iconPack").innerHTML = '<table class="table">' +
                                                     '    <thead>' +
                                                     '      <tr>' +
@@ -228,12 +247,19 @@ function openModal(event, iconID) {
     document.getElementById("exampleModal").className += "show"
 }
 
+/**
+ * Hide the modal
+ */
 function closeModal() {
     document.getElementById("backdrop").style.display = "none"
     document.getElementById("exampleModal").style.display = "none"
     document.getElementById("exampleModal").className += document.getElementById("exampleModal").className.replace("show", "")
 }
 
+/**
+ * Used to handle pagination. 
+ * @param {Event} event 
+ */
 async function handleNav(event) {
     let paginationButtons = document.getElementById("pagination-bar").children;
     paginationButtons[currentSearchPage].classList.remove("active");
@@ -246,13 +272,16 @@ async function handleNav(event) {
     let url = "https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons?" + currentSearchURL + "&startNum=" + (currentSearchPage * 100).toString();
     var res = await fetch(url);
     var jsonResult = await res.json();
-    if (res.status != 200) {
-        alert("The endpoint returned a status code other than 200");
-        console.log(jsonResult);
+    // Error handling
+    if (res.status == 500 && jsonResult.error === "No search filters supplied") {
+        document.getElementById("tiles").innerHTML = '<h2 class="text-center">Please pick either a framework or enter search terms</h2>';
         return false;
     }
-    console.log(jsonResult);
-    console.log((new Date()).valueOf());
+    else if (res.status != 200) {
+        document.getElementById("tiles").innerHTML = '<h2 class="text-center">Error occurred</h2>';
+        document.getElementById("tiles").innerHTML += '<p class="text-center">' + res + '</p>';
+        document.getElementById("tiles").innerHTML += '<p class="text-center">' + jsonResult + '</p>';
+    }
     populateSearchResults(JSON.parse(jsonResult.items));
     var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
     for (let index = 0; index < frameworkURLs.length; index++) {
@@ -262,6 +291,7 @@ async function handleNav(event) {
     }
 }
 
+// Close modal on click outside it
 window.onclick = function (event) {
     var modal = document.getElementById('exampleModal');
     if (event.target == modal) {
@@ -269,12 +299,11 @@ window.onclick = function (event) {
     }
 }
 
-document.onload = function (event) {
-    if (document.getElementById("search-form")) {
-        document.getElementById("search-form").reset()
-    }
-}
-
+/**
+ * Adds/removes a class name to both the icon and the icon code (in the modal)
+ * @param {Event} event 
+ * @param {String} className className to act on
+ */
 function toggleFeature(event, className) {
     let initialClass = document.getElementById('icon').className;
     if (!document.getElementById('icon').classList.contains(className)) {
@@ -286,11 +315,19 @@ function toggleFeature(event, className) {
     document.getElementById('loadIcon').value = document.getElementById('loadIcon').value.replace(initialClass, document.getElementById('icon').className)
 }
 
+ /**
+  * Change the color of the icon (in the modal)
+  * @param {Event} event 
+  */
 function changeIconColor(event) {
     document.getElementById('icon').style.color = event.target.value
     document.getElementById('loadIcon').value = '<i class="' + document.getElementById("icon").className + '" style="color:' + event.target.value + ';"></i>'
 }
 
+/**
+ * For iconpacks.html, inserts the list of icon packs into the page.
+ * @param {Event} event 
+ */
 async function insertIconPacks(event) {
     let iconPackList = document.getElementById("iconPackList");
     if (!iconPacks) {
