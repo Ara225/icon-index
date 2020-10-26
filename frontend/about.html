@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        Icon Index
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body class="m-3 ">
+    <a class="btn btn-outline-info" href="/">
+        Back to Home
+    </a>
+
+    <section class="container-flex rounded">
+            <div class="row">
+                <div class="col-12 col-md-8 container">
+                    <br>
+                    <h3 style="color: #3c87b3">
+                        About
+                    </h3>
+                    <p>
+                        Icon Index is a index of icons from web icon packs. The goal is to make it easier to find packs containing the icons 
+                        you want in the styles you want. This type of icon are completely un-indexed (apart from on their creators' website) 
+                        so it's hopefully a useful tool. Feedback and comments are more than welcome.
+                    </p>
+                    <p>
+                        Please note that I have no affiliation with any of the icon packs I index.
+                    </p>
+                    <br>
+                </div>
+                <div class="col-12 col-md-8 container">
+                    <h3 style="color: #3c87b3">
+                        Search
+                    </h3>
+                    <p>
+                        Icon Index currently supports searching icons by keyword and/or framework. Additionally, it offers two advanced options powered by 
+                        <a href="https://fusejs.io/">fuse.js</a>: extended search, which uses simple regex-like syntax for more advanced queries (see 
+                        <a href="https://fusejs.io/examples.html#extended-search">examples on the fuse.js website</a>), and fuzzy match which matches icons containing substrings of the 
+                        search term.
+                    </p>
+                    <br>
+                </div>
+
+                <div class="col-12 col-md-8 container">
+                    <h3 style="color: #3c87b3">
+                        API
+                    </h3>
+                    <br>
+                    <h4 style="color: #3c87b3">
+                        /icons
+                    </h4>
+                    <p>
+                        Endpoint for searching icons. Supports GET requests. Returns JSON. All options are intended to be in the 
+                        query string. Available at https://tmtvan5cd2.execute-api.eu-west-2.amazonaws.com/prod/icons currently 
+                        (this will change). CORS is enabled.
+                        <br>
+                    </p>
+                    <p>
+                        <b>
+                            Options
+                        </b>
+                        <ul>
+                            <li>
+                                keywords - Keywords to search for. Interpreted as plain text
+                            </li>
+                            <li>
+                                extendedSearch - Enable/disable extended search. Expects JS style boolean value. Default is disabled.
+                            </li>
+                            <li>
+                                frameworkIDs - Comma separated list of valid framework IDs (from <a href="iconPacks.json">the icon pack list</a>)
+                            </li>
+                            <li>
+                                fuzzyMatch - Enable/disable fuzzy match. Expects JS style boolean value. Default is disabled.
+                            </li>
+                            <li>
+                                startNum - Starting number, used as a primitive form of pagination.
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        <b>
+                            Success Return object
+                        </b>
+                        <div style="margin:1%;padding:2%;background-color:#DAE0E6;" class="text-left rounded">
+<pre>
+{
+    "items": [
+               {
+                   "item": {
+                               "className": "fab fa-accessible-icon",
+                               "charName": "\\f368", 
+                               "frameworkID": 0, 
+                               "id": "accessible icon", 
+                               "prefix": "fa"
+                           }
+               }
+               ... // Upto 99 more icon records
+           ],
+    "frameworkURLs": [ // URLs for every icon pack in the returned results
+        ""
+    ],
+    "totalResults": 100, // The amount of results in total
+    "remainingResults": 10, // Results that haven't been returned yet
+    "startNum": 0 // the same startNum provided in the query
+}
+</pre>
+                        </div>
+                    </p>
+                    <p>
+                        <b>
+                            Errors
+                        </b>
+                        <br>
+                        Errors always return status code 500 and a error message.
+                        <div style="margin:1%;padding:2%;background-color:#DAE0E6;" class="text-left rounded">
+                            {"error": "Invalid framework ID supplied"}
+                        </div>
+                        The frameworkIDs param didn't consist of purely numbers and commas as expected
+                        <div style="margin:1%;padding:2%;background-color:#DAE0E6;" class="text-left rounded">
+                            {"error": "No search filters supplied"}
+                        </div>
+                        The backend expects either the frameworkIDs or keywords to be supplied. Both of these were missing.
+                    </p>
+                    <br>
+                </div>
+            </div>
+    </section>
+    <br>
+    <br>
+    <footer style="padding:3%;background-color:#DAE0E6;" class="text-center rounded">
+        Made with love by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a>
+    </footer>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        Framework Ninja
+        Icon Index
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,10 +25,10 @@
                     Search 5000+ Free Web Icons
                 </h1>
                 <br>
-                <div>
+                <div class="col-12">
                     <input class="form-control shadow" style="height: 3em;" id="keywords">
                     <button class="btn btn-success shadow"
-                        style="right: 15px; top:5em; position: absolute;height: 3em;border-top-left-radius: 0%;border-bottom-left-radius: 0%;">
+                        style="right: 15px; top: 0px; position: absolute;height: 3em;border-top-left-radius: 0%;border-bottom-left-radius: 0%;">
                         <span style="font-size: large;">Search</span>
                     </button>
                 </div>
@@ -50,9 +50,9 @@
                         </div>
                     </div>
                     &nbsp;
-                    <label class="menu-btn"><input type="checkbox" id="extendedSearch"> Enable Extended Search</label>
+                    <label class="menu-btn"><input type="checkbox" id="extendedSearch"> Enable Extended Search <a href="about.html"><i class="fas fa-info-circle"></i></a></label>
                     &nbsp;
-                    <label class="menu-btn"><input type="checkbox" id="fuzzyMatch"> Enable Fuzzy Match</label>
+                    <label class="menu-btn"><input type="checkbox" id="fuzzyMatch"> Enable Fuzzy Match <a href="about.html"><i class="fas fa-info-circle"></i></a></label>
                 </div>
             </div>
             <div class="d-none" id="overlay" onclick="hide(event)"></div>
@@ -94,7 +94,9 @@
                         <p class="text-left col-12 col-md-6" id="iconBehavior">
                         </p>
                     </div>
-                    <br>
+                    <h5>Icon Pack</h5>
+                    <div id="iconPack">
+                    </div>
                     <div class="row">
                         <div class="col-12 col-sm-6 text-left">
                             <button class="btn btn-outline-success" id="leftNav"
@@ -118,7 +120,7 @@
         <div class="row">
             <div class="col-md-6" style="padding: 1% 10%;">
                 <h2 style="color: #3c87b3">
-                    Docs/About
+                    Help & About
                 </h2>
                 <br>
                 <h5>
@@ -148,7 +150,7 @@
                 </h2>
                 <br>
                 <h5>
-                    Icon Index is a simple HTML/CSS/JS app with a node.js backend, using AWS Lambda, S3 and CloudFront. Thoughts and contributions welcome
+                    Icon Index is a simple HTML/CSS/JS app with a node.js backend, using fuse.js and hosted on AWS. Thoughts and contributions welcome.
                 </h5>
                 <br>
                 <a href="https://github.com/Ara225/icon-index" target="_blank" class="btn btn-success">
@@ -161,8 +163,8 @@
                 </h2>
                 <br>
                 <h5>
-                    The Icon Index dataset is available as a JSON file under the MIT license (attribution 
-                    not required, but appreciated).
+                    The Icon Index dataset is available as a JSON file under the MIT license. You'll also need the separate 
+                    <a href="iconPacks.json"  target="_blank" rel="nofollow" download>list of icon packs</a> to work with the data.
                 </h5>
                 <br>
                 <a class="btn btn-success" href="icons.json" target="_blank" rel="nofollow" download>

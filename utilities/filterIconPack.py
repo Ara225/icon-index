@@ -4,10 +4,10 @@ import json
 import requests
 import os
 
-dictionary = {}
-for i in os.listdir("./data"):
-    with open("./data/" + i, encoding="utf8") as f:
-        dictionary[i[1]] = json.loads(f.read())
+#dictionary = {}
+#for i in os.listdir("./data"):
+#    with open("./data/" + i, encoding="utf8") as f:
+#        dictionary[i[1]] = json.loads(f.read())
     
 with open("iconPacks.json", encoding="utf8") as f:
     iconPacks = json.loads(f.read())
@@ -20,6 +20,7 @@ for iconPack in iconPacks:
     else:
        framework = requests.get(iconPack["url"])
        cssRuleList = framework.text.split("}")
+    AmountOfIcons = 1
     for cssRule in cssRuleList:
         if cssRule.find(iconPack["prefix"]) == -1 or cssRule.find(":before{content:") == -1 or cssRule.find(";") != -1 or cssRule.find("px:before{content:") != -1 :
             continue
@@ -30,7 +31,10 @@ for iconPack in iconPacks:
                           "prefix": iconPack["prefix"].replace("-", "")
                          }
             iconList.append(iconRecord)
+            AmountOfIcons += 1
     count += 1
+    print(iconPack["name"])
+    print(AmountOfIcons)
 
 with open("icons.json", "w", encoding="utf8") as f:
     f.write(json.dumps(iconList))
