@@ -11,30 +11,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="css/custom-styles.css">
+    <link rel="stylesheet" href="css/custom-styles.css?jjj">
     <script src="js/custom.js"></script>
 </head>
 
 <body class="m-3 ">
-    <div class="rounded" style="background-image: linear-gradient(rgb(93, 76, 161), rgb(141, 106, 170));color:white">
-        <form style="padding: 10% 0%;" class="container-flex text-center"
-            onsubmit="console.log((new Date()).valueOf());onFormSubmit(event);return false;" id="search-form">
-
+    <div class="rounded white" id="hero">
+        <form class="container-flex text-center" onsubmit="onFormSubmit(event);return false;" id="search-form">
             <div class="col-md-8 col-12 container text-center ">
                 <h1>
                     Search 10000+ Free Web Icons
                 </h1>
                 <br>
                 <div class="col-12">
-                    <input class="form-control shadow" style="height: 3em;" id="keywords">
-                    <button class="btn btn-success shadow" on
-                        style="right: 15px; top: 0px; position: absolute;height: 3em;border-top-left-radius: 0%;border-bottom-left-radius: 0%;">
-                        <span style="font-size: large;">Search</span>
+                    <input class="form-control shadow" id="keywords">
+                    <button class="btn btn-success shadow" id="search-btn">
+                        <span>Search</span>
                     </button>
                 </div>
             </div>
             <br>
-            <div class="col-md-6 col-12 container" style="color: black;">
+            <div class="col-md-6 col-12 container">
                 <div class="row d-flex justify-content-center ">
                     <div>
                         <button onclick="dropDown(event);" class="menu-btn" type="button">
@@ -82,30 +79,28 @@
 
     </div>
     <div id="searchHeader"></div>
-    <div class="row d-flex justify-content-center" id="tiles" style="background-color: white;">
+    <div class="row d-flex justify-content-center" id="tiles">
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content text-center">
                 <div class="modal-body container-flex">
-                    <i class="" id="icon" style="font-size: 200px"></i>
+                    <i class="" id="icon"></i>
                     <h4 id="iconTagLine">
                     </h4>
                     <div class="row">
                         <p class="text-left col-12 col-md-6">
                             Load Icon Pack <button onclick="copyToClipboard(event)"
-                                style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
-                                class="btn btn-info">Copy</button>
+                                class="btn btn-info copy-btn">Copy</button>
                             <br>
-                            <input value="" style="box-shadow: none;" id="loadIconPack" class="form-control">
+                            <input value="" id="loadIconPack" class="form-control no-shadow">
                         </p>
                         <p class="text-left col-12 col-md-6">
                             Insert <button onclick="copyToClipboard(event)"
-                                style="padding: 3px;font-size: 10px;position: absolute;right: 15px;top: 1em"
-                                class="btn btn-info">Copy</button>
+                                class="btn btn-info copy-btn">Copy</button>
                             <br>
-                            <input value="" style="box-shadow: none;" id="loadIcon" class="form-control">
+                            <input value="" id="loadIcon" class="form-control no-shadow">
                         </p>
                     </div>
                     <div class="row">
@@ -138,8 +133,8 @@
 
     <section style="margin: 4% 1%;">
         <div class="row">
-            <div class="col-md-6" style="padding: 1% 10%;">
-                <h2 style="color: #3c87b3">
+            <div class="col-md-6 col-12 info-item">
+                <h2 class="info-header">
                     Help & About
                 </h2>
                 <br>
@@ -151,8 +146,8 @@
                     More Info
                 </a>
             </div>
-            <div class="col-md-6" style="padding: 1% 10%;">
-                <h2 style="color: #3c87b3">
+            <div class="col-md-6 col-12 info-item">
+                <h2 class="info-header">
                     Icon Packs
                 </h2>
                 <br>
@@ -164,8 +159,8 @@
                     View All
                 </a>
             </div>
-            <div class="col-md-6" style="padding: 1% 10%;">
-                <h2 style="color: #3c87b3">
+            <div class="col-md-6 col-12 info-item">
+                <h2 class="info-header">
                     Code
                 </h2>
                 <br>
@@ -177,8 +172,8 @@
                     View Repo
                 </a>
             </div>
-            <div class="col-md-6" style="padding: 1% 10%;">
-                <h2 style="color: #3c87b3">
+            <div class="col-md-6 col-12 info-item">
+                <h2 class="info-header">
                     Dataset
                 </h2>
                 <br>
@@ -193,7 +188,7 @@
             </div>
         </div>
     </section>
-    <footer style="padding:3%;background-color:#DAE0E6;" class="text-center rounded">
+    <footer class="text-center rounded">
         Made by <a href="http://www.aitchisonsoft.co.uk">Anna Aitchison</a>
     </footer>
 </body>
