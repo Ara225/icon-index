@@ -6,9 +6,18 @@
         "fileURL": "brand.css",
         "prefix": "fa-",
         "class": "fab",
-        "animations": [{"name": "Spin", "class": "fa-spin", "JavaScript": "toggleFeature(event, 'fa-spin')"}],
+        "displayOpts": [
+                        {"name": "Spin", "class": "fa-spin"},
+                        {"name": "Pulse", "class": "fa-pulse"},
+                        {"name": "Rotate 90°", "class": "fa-rotate-90"},
+                        {"name": "Rotate 180°", "class": "fa-rotate-180"},
+                        {"name": "Rotate 270°", "class": "fa-rotate-270"},
+                        {"name": "Mirrors icon horizontally", "class": "fa-flip-horizontal"},
+                        {"name": "Mirrors icon vertical", "class": "fa-flip-vertical"},
+                        {"name": "Mirrors icon vertically and horizontally", "class": "fa-flip-both"}
+        ],
         "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
-        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+        "details": {"creatorSite": "https://fontawesome.com/", "repo": "https://github.com/FortAwesome/Font-Awesome", "numberOfIcons": 449}
     },
     {
         "name": "Font Awesome Other",
@@ -17,18 +26,115 @@
         "fileURL": "other.css",
         "prefix": "fa-",
         "class": "fas",
-        "animations": [{"name": "Spin", "class": "fa-spin", "JavaScript": "toggleFeature(event, 'fa-spin')"}],
+        "displayOpts": [
+                        {"name": "Spin", "class": "fa-spin"},
+                        {"name": "Pulse", "class": "fa-pulse"},
+                        {"name": "Rotate 90°", "class": "fa-rotate-90"},
+                        {"name": "Rotate 180°", "class": "fa-rotate-180"},
+                        {"name": "Rotate 270°", "class": "fa-rotate-270"},
+                        {"name": "Mirrors icon horizontally", "class": "fa-flip-horizontal"},
+                        {"name": "Mirrors icon vertical", "class": "fa-flip-vertical"},
+                        {"name": "Mirrors icon vertically and horizontally", "class": "fa-flip-both"}
+        ],
         "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
-        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+        "details": {"creatorSite": "https://fontawesome.com/", "repo": "https://github.com/FortAwesome/Font-Awesome", "numberOfIcons": 1000}
     },
     {
         "name": "Material Design Icons",
-        "version": "5.4.55",
-        "url": "http://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css",
+        "version": "5.8.55",
+        "url": "https://cdn.materialdesignicons.com/5.8.55/css/materialdesignicons.min.css",
         "prefix": "mdi-",
         "class": "mdi",
-        "animations": [],
+        "displayOpts": [
+            {"name": "Rotate 45 Degrees", "class": "mdi-rotate-45"},
+            {"name": "Rotate 90 Degrees", "class": "mdi-rotate-90"},
+            {"name": "Rotate 135 Degrees", "class": "mdi-rotate-135"},
+            {"name": "Rotate 180 Degrees", "class": "mdi-rotate-180"},
+            {"name": "Rotate 225 Degrees", "class": "mdi-rotate-225"},
+            {"name": "Rotate 270 Degrees", "class": "mdi-rotate-270"},
+            {"name": "Rotate 315 Degrees", "class": "mdi-rotate-315"},
+            {"name": "Flip horizontal", "class": "mdi-flip-h"},
+            {"name": "Flip vertical", "class": "mdi-flip-v"},
+            {"name": "Spinning icon", "class": "mdi-spin"}
+        ],
         "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
-        "details": {"creatorSite": "", "repo": "", "packageSize": "", "numberOfIcons": 100, "dependencies": []}
+        "details": {"creatorSite": "https://dev.materialdesignicons.com", "repo": "https://github.com/Templarian/MaterialDesign", "numberOfIcons": 5856}
+    },
+    {
+        "name": "Line Icons",
+        "version": "2",
+        "url": "https://cdn.lineicons.com/2.0/LineIcons.css",
+        "prefix": "lni-",
+        "class": "lni",
+        "displayOpts": [
+            {"name": "Spin", "class": "lni-is-spinning"},
+            {"name": "Rotate 90°", "class": "lni-rotate-90"},
+            {"name": "Rotate 180°", "class": "lni-rotate-180"},
+            {"name": "Rotate 270°", "class": "lni-rotate-270"},
+            {"name": "Mirrors icon horizontally", "class": "lni-flip-x"},
+            {"name": "Mirrors icon vertical", "class": "lni-flip-y"}
+        ],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://lineicons.com", "repo": "", "numberOfIcons": 515}
+    },
+    {
+        "name": "Open Iconic",
+        "version": "1.1.1",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css",
+        "prefix": "oi-",
+        "class": "oi",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://useiconic.com/open", "repo": "https://github.com/iconic/open-iconic", "numberOfIcons": 224 }
+    },
+    {
+        "name": "Simple Line Icons",
+        "version": "2.5.5",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css",
+        "prefix": "",
+        "class": "",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://thesabbir.github.io/simple-line-icons/", "repo": "https://github.com/thesabbir/simple-line-icons", "numberOfIcons": 190 }
+    },
+    {
+        "name": "Tabler Icons",
+        "version": "1.34.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.34.0/iconfont/tabler-icons.min.css",
+        "prefix": "ti-",
+        "class": "ti",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://tabler.io", "repo": "https://github.com/tabler/tabler-icons", "numberOfIcons": 896 }
+    },
+    {
+         "name": "Weather Icon",
+        "version": "2.0.10",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css",
+        "prefix": "wi-",
+        "class": "wi",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "http://erikflowers.github.io", "repo": "https://github.com/erikflowers/weather-icons", "numberOfIcons": 588 }
+    },
+    {
+         "name": "Found Icons",
+        "version": "3.0.0",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css",
+        "prefix": "fi-",
+        "class": "",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://zurb.com/playground/foundation-icon-fonts-3", "repo": "https://github.com/zurb/foundation-icons", "numberOfIcons": 283 }
+    },
+    {
+        "name": "Fontisto",
+        "version": "3.0.4",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/fontisto/3.0.4/css/fontisto/fontisto.min.css",
+        "prefix": "fi-",
+        "class": "fi",
+        "displayOpts":  [],
+        "looks": [{"name": "Change Color", "JavaScript":  "changeIconColor(event)", "elementType": "color"}],
+        "details": {"creatorSite": "https://www.fontisto.com", "repo": "https://github.com/kenangundogan/fontisto", "numberOfIcons": 617 }
     }
 ]

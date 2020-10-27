@@ -26,6 +26,8 @@ for iconPack in iconPacks:
             continue
         else:
             splitRule = cssRule.replace(".", "").replace('"', "").replace("::", ":").split(":before{content:")
+            if "," in splitRule[0]:
+                splitRule[0] = splitRule[0].split(",")[len(splitRule[0].split(","))-1]
             iconRecord = {"className": iconPack["class"] + " " + splitRule[0], "charName": splitRule[1], "frameworkID": count,
                           "id": splitRule[0].replace(iconPack["prefix"], "").replace("-", " "),
                           "prefix": iconPack["prefix"].replace("-", "")
