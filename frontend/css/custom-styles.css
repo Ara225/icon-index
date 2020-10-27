@@ -12,7 +12,8 @@
     margin-top: 4px;
     background-color: white;
     position: absolute;
-    max-height: 5vh;
+    max-height: 12em;
+    overflow-y: auto;
 }
 
 .menu-option {

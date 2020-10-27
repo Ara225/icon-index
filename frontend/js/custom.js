@@ -120,7 +120,8 @@ async function onFormSubmit(event) {
         var jsonResult = await res.json();
         // Error handling
         if (res.status == 500 && jsonResult.error === "No search filters supplied") {
-            document.getElementById("tiles").innerHTML = '<h2 class="text-center">Please pick either a framework or enter search terms</h2>';
+            document.getElementById("tiles").innerHTML = "";
+            alert("Please either select a framework or enter search terms");
             return false;
         }
         else if (res.status != 200) {
@@ -129,7 +130,7 @@ async function onFormSubmit(event) {
             document.getElementById("tiles").innerHTML += '<p class="text-center">' + jsonResult + '</p>';
         }
         // Put the search results into the page
-        populateSearchResults(JSON.parse(jsonResult.items));
+        populateSearchResults(JSON.parse(jsonResult.items), jsonResult.totalResults);
         // Load in the required iconpacks/frameworks
         var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
         for (let index = 0; index < frameworkURLs.length; index++) {
@@ -167,9 +168,10 @@ async function onFormSubmit(event) {
  * Place the search results on to the page. 
  * @param {Array} items 
  */
-async function populateSearchResults(items) {
+async function populateSearchResults(items, totalResults) {
     document.getElementById("tiles").innerHTML = "";
-    document.getElementById("searchHeader").innerHTML = '<h2 class="text-center" style="margin: 5% 0% 3%">' + items.length + ' Matching Results<hr style="width: 100px;border-width: 3px;"></h2>';
+    document.getElementById("searchHeader").innerHTML = '<h2 class="text-center" style="margin: 5% 0% 3%">Displaying ' + items.length + 
+                                                        ' of ' + totalResults + ' Results<hr style="width: 100px;border-width: 3px;"></h2>';
     for (let item = 0; item < items.length; item++) {
         const element = items[item];
         let tiles = document.getElementById("tiles");
@@ -203,14 +205,15 @@ function openModal(event, iconID) {
     document.getElementById("iconTagLine").innerText = className.split(" ")[1] + " from " + iconPacks[frameworkID].name;
     document.getElementById("loadIconPack").value = '<link rel="stylesheet" href="' + iconPacks[frameworkID].url + '">';
     document.getElementById("loadIcon").value = '<i class="' + className + '"></i>';
-    document.getElementById("iconBehavior").innerHTML = "<label>Animations</label>"
-    for (let animation = 0; animation < iconPacks[frameworkID].animations.length; animation++) {
-        console.log(iconPacks[frameworkID].animations[animation])
-        document.getElementById("iconBehavior").innerHTML += '<button type="button" class="btn btn-outline-info d-block w-100" onclick="' +
-        iconPacks[frameworkID].animations[animation].JavaScript + '">' + iconPacks[frameworkID].animations[animation].name +
-        '</button>';
+    if (iconPacks[frameworkID].displayOpts) {
+        let options = "";
+        for (let displayOpt = 0; displayOpt < iconPacks[frameworkID].displayOpts.length; displayOpt++) {
+            options += '<option value="' + iconPacks[frameworkID].displayOpts[displayOpt].class + '">' + iconPacks[frameworkID].displayOpts[displayOpt].name + '</option>';
+        }
+        document.getElementById("iconBehavior").innerHTML = "<label>Display</label><br><select onchange='toggleFeature(event);'  class='form-control'>" +
+                                                            "<option value=''>-- Select --</option>" + options + "</select>";
     }
-    document.getElementById("iconLooks").innerHTML = "<label>Looks</label>"
+    document.getElementById("iconLooks").innerHTML = "<label>Color</label>"
     for (let look = 0; look < iconPacks[frameworkID].looks.length; look++) {
         console.log(iconPacks[frameworkID].looks[look])
         document.getElementById("iconLooks").innerHTML += '<input type="' + iconPacks[frameworkID].looks[look].elementType + '" class="form-control" onchange="' +
@@ -220,22 +223,20 @@ function openModal(event, iconID) {
     document.getElementById("iconPack").innerHTML = '<table class="table">' +
                                                     '    <thead>' +
                                                     '      <tr>' +
-                                                    '        <th scope="col">Version</th>' +
-                                                    '        <th scope="col">Icons</th>' +
-                                                    '        <th scope="col">Size</th>' +
+                                                    '        <th scope="col">Pack Version</th>' +
+                                                    '        <th scope="col">Icons in Pack</th>' +
                                                     '      </tr>' +
                                                     '    </thead>' +
                                                     '    <tbody>' +
                                                     '      <tr>' +
                                                     '        <td>'+ iconPacks[frameworkID].version +'</td>' +
                                                     '        <td>' + iconPacks[frameworkID].details.numberOfIcons + '</td>' +
-                                                    '        <td>' + iconPacks[frameworkID].details.packageSize + '</td>' +
                                                     '      </tr>' +
                                                     '    </tbody>' +
                                                     ' </table>' +
                                                     ' <div class="row">' +
                                                     '      <div class="col-6">' +
-                                                    '        <a href="' + iconPacks[frameworkID].details.repo + '">Repo</a>' +
+                                                    (iconPacks[frameworkID].details.repo ? '<a href="' + iconPacks[frameworkID].details.repo + '">Repo</a>' : "") +
                                                     '      </div>' +
                                                     '      <div class="col-6">' +
                                                     '        <a href="' + iconPacks[frameworkID].details.creatorSite + '">Creator Site</a>' +
@@ -274,7 +275,8 @@ async function handleNav(event) {
     var jsonResult = await res.json();
     // Error handling
     if (res.status == 500 && jsonResult.error === "No search filters supplied") {
-        document.getElementById("tiles").innerHTML = '<h2 class="text-center">Please pick either a framework or enter search terms</h2>';
+        document.getElementById("tiles").innerHTML = "";
+        alert("Please either select a framework or enter search terms");
         return false;
     }
     else if (res.status != 200) {
@@ -282,7 +284,7 @@ async function handleNav(event) {
         document.getElementById("tiles").innerHTML += '<p class="text-center">' + res + '</p>';
         document.getElementById("tiles").innerHTML += '<p class="text-center">' + jsonResult + '</p>';
     }
-    populateSearchResults(JSON.parse(jsonResult.items));
+    populateSearchResults(JSON.parse(jsonResult.items), jsonResult.totalResults);
     var frameworkURLs = JSON.parse(jsonResult.frameworkURLs);
     for (let index = 0; index < frameworkURLs.length; index++) {
         if (!document.head.innerHTML.includes(frameworkURLs[index])) {
@@ -302,16 +304,21 @@ window.onclick = function (event) {
 /**
  * Adds/removes a class name to both the icon and the icon code (in the modal)
  * @param {Event} event 
- * @param {String} className className to act on
  */
-function toggleFeature(event, className) {
+function toggleFeature(event) {
+    let className = event.target[event.target.selectedIndex].value;
     let initialClass = document.getElementById('icon').className;
-    if (!document.getElementById('icon').classList.contains(className)) {
-        document.getElementById('icon').classList.add(className)
-    }
-    else {
-        document.getElementById('icon').classList.remove(className)
-    }
+    document.getElementById('icon').className = initialClass.split(" ").slice(0,2).join(" ") + " " + className;
+    document.getElementById('loadIcon').value = document.getElementById('loadIcon').value.replace(initialClass, document.getElementById('icon').className)
+}
+
+/**
+ * Restores class name to original
+ * @param {Event} event 
+ */
+function clearFeatures() {
+    let initialClass = document.getElementById('icon').className;
+    document.getElementById('icon').className = initialClass.split(" ").slice(0,2).join(" ");
     document.getElementById('loadIcon').value = document.getElementById('loadIcon').value.replace(initialClass, document.getElementById('icon').className)
 }
 
@@ -336,7 +343,7 @@ async function insertIconPacks(event) {
     }
     for (let index = 0; index < iconPacks.length; index++) {
         const element = iconPacks[index];
-        iconPackList.innerHTML += '<div class="card shadow" style="margin: 1%">' +
+        iconPackList.innerHTML += '<div class="card shadow col-3" style="margin: 15px; padding:0px">' +
         '<a href="' + element.details.creatorSite + '" class="card-header">' +
         '<h5>' + element.name + '</h5></a>' +
         '<ul class="list-group list-group-flush">' +
@@ -345,9 +352,6 @@ async function insertIconPacks(event) {
             '</li>' +
             '<li class="list-group-item">'+
                 'Icons: ' + element.details.numberOfIcons +
-            '</li>'+
-            '<li class="list-group-item">'+ 
-                'Size: ' + element.details.packageSize +
             '</li>'+
             '<li class="list-group-item">'+
                 '<a href="' + element.details.repo + '">Repo</a>' +
