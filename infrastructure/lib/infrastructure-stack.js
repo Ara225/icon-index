@@ -30,7 +30,7 @@ class InfrastructureStack extends cdk.Stack {
         var getIconsIntegration = new apigateway.LambdaIntegration(getIcons, { proxy: true })
         getIconsResource.addMethod('GET', getIconsIntegration)
         var iconIndexSiteBucket = new s3.Bucket(this, "iconIndexSiteBucket", {
-            bucketName: "icon-index-site-bucket",
+            bucketName: "ii.aitchisonsoft.co.uk",
             publicReadAccess: true,
             websiteIndexDocument: "index.html",
             accessControl: s3.BucketAccessControl.PUBLIC_READ

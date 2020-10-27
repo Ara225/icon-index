@@ -15,6 +15,7 @@
     position: absolute;
     max-height: 12em;
     overflow-y: auto;
+    color: black;
 }
 
 .menu-option {
